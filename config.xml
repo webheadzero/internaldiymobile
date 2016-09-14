@@ -6,14 +6,14 @@
         id        = "com.jmc.internaldiy"
         version   = "1.0.0">
 
-    <name>Hello World</name>
+    <name>SI Internal DIY</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        SI Internal DIY Mobile Apps
     </description>
 
     <author href="http://jmc.co.id" email="support@jmc.co.id">
-        PhoneGap Team
+        JMC
     </author>
 
     <!-- Define the main entry-point to the application -->
