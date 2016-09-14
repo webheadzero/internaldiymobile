@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>SI Internal DIY</title>
+    <style type="text/css">
+    	.offline{
+    		position: fixed;
+    		top:0;left:0;bottom:0;right:0;
+    		background: #c0392b;
+    	}
+    	.offline .box{
+    		position: absolute;
+    		top:50%;
+    		left:50%;
+    		transform:translate(-50%,-50%);
+    		text-align: center;
+    		color:#fff;
+    	}
+    	.offline .box img{
+    		width: 100px;
+    	}
+    	.offline .box h1{
+    		margin:0;
+    		font-size:20px;
+    		line-height: 19px;
+    		font-weight: bold;
+    		margin-bottom: 30px;
+    	}
+    	.offline .box h4{
+    		color:rgba(255,255,255,0.5);
+    		margin-bottom: 50px;
+    	}
+    	.offline .box a{
+    		display: inline-block;
+    		padding:10px 30px;
+    		background:rgba(255,255,255,0.1);
+    		color:#fff;
+    		font-weight: bold;
+    		border-radius: 50px;
+    		-webkit-border-radius: 50px;
+    		text-decoration: none;
+    	}
+    </style>
+</head>
+
+<body>
+    <div class="offline">
+    	<div class="box">
+			<img src="img/internet-connections-off.png">
+			<h1>No Connection Available!!</h1>
+			<h4>
+				Please enable Internet Connection
+			</h4>
+			<a href="index.html">Retry</a>
+    	</div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+</body>
+
+</html>
