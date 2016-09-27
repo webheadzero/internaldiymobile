@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'norpeth';
+    src: url('norpeth.eot');
+    src: url('norpeth.eot') format('embedded-opentype'),
+         url('norpeth.woff2') format('woff2'),
+         url('norpeth.woff') format('woff'),
+         url('norpeth.ttf') format('truetype'),
+         url('norpeth.svg#norpeth') format('svg');
+}
+@font-face {
+    font-family: 'norpeth-ultra';
+    src: url('norpeth-ultra.eot');
+    src: url('norpeth-ultra.eot') format('embedded-opentype'),
+         url('norpeth-ultra.woff2') format('woff2'),
+         url('norpeth-ultra.woff') format('woff'),
+         url('norpeth-ultra.ttf') format('truetype'),
+         url('norpeth-ultra.svg#norpeth-ultra') format('svg');
+}
+@font-face {
+    font-family: 'norpeth-extrabold';
+    src: url('norpeth-extrabold.eot');
+    src: url('norpeth-extrabold.eot') format('embedded-opentype'),
+         url('norpeth-extrabold.woff2') format('woff2'),
+         url('norpeth-extrabold.woff') format('woff'),
+         url('norpeth-extrabold.ttf') format('truetype'),
+         url('norpeth-extrabold.svg#norpeth-extrabold') format('svg');
+}
+

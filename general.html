@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <title>Sistem Informasi Internal</title>
+	    <meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+	    <link href="static/fonts/norpeth/stylesheet.css" rel="stylesheet">
+		<link href="static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="static/css/jquery.circliful.css" rel="stylesheet">
+		<link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/jmc_layout.css" rel="stylesheet">
+		<link href="static/css/jmc_widget.css" rel="stylesheet">
+		<link href="static/css/jmc_theme.css" rel="stylesheet">
+		<link href="static/css/jmc_responsive.css" rel="stylesheet">
+		<link href="static/plugins/sweet-alert/sweet-alert.css" rel="stylesheet">
+		<script src="static/js/jquery-1.12.0.min.js"></script>
+		<script src="static/js/jquery-migrate-1.3.0.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+		<script src="static/js/jquery.cookie.js"></script>
+		<script src="static/js/application.js"></script>
+		<script src="static/plugins/sweet-alert/sweet-alert.min.js"></script>
+		<style type="text/css">
+		    .dashboard{ font-family: "norpeth" }
+		    .extra{ font-family: "norpeth-extrabold", sans-serif; }
+		    .ultra{ font-family: "norpeth-ultra", sans-serif; }
+		    .clock {
+		        background-image: url(data:image/png;base64,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);
+		        width: 60px;height:60px;
+		        text-align: center;
+		        background-size: cover;
+		        background-repeat: no-repeat;
+		    }
+		</style>
+		<script type="text/javascript">
+			function refresh(loader='true')
+			{
+				loadData(loader);
+
+				setTimeout(function(){
+					refresh(false);
+				}, 30000);
+			}
+		</script>
+	</head>
+	<body class="fullpage">
+		<div id="sidebar-mobile">
+			<div class="sidebar-mobile-overlay"></div>
+			<div class="sidebar-mobile-content">
+				<div class="sidebar-mobile-head">
+					<img src="icon.png">
+	                <h4>SI Internal</h4>
+	                <h3>EKSEKUTIF</h3>
+				</div>
+				<ul class="sidebar-mobile-menu">
+					<li><a href="general.html"><i class="fa fa-line-chart"></i> Dashboard Internal</a></li>
+					<li><a href="keuangan.html"><i class="fa fa-bar-chart"></i> Eksekutif Keuangan</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="page" class="layout">
+		    <div id="jmc_body" class="layout layout-center">
+		        <div id="jmc_navbar" class="navbar layout layout-north">
+		        	<a href="#" class="sidebar-toggler-button"><span class="bar"></span></a>
+		            <div class="navbar-header">
+		                <a class="navbar-brand" href="./">Dashboard Internal</a>
+		            </div>
+		            <div class="clearfix"></div>
+		        </div>
+		        <div class="layout layout-center"  id="wrapper">
+					<div id="contentpane" class="layout layout-center scroll dashboard" style="padding:15px;color:#575757;text-align: center;">
+					    <div class="row">
+					        <div class="col-sm-3">
+					            <div id="dashboard-logo" style="color:#575757; margin-bottom:15px;">
+					                <div style="font-size:40px;font-weight:bold;" class="extra" id="title_apbd">APBD 2016</div>
+					                <div style="font-size:50px;font-weight:bold;margin-top:-20px;text-align: center;" class="extra" id="jml_apbd"> 0 M </div>
+					                <div style="text-align:center;color:#aaa;position:relative;margin-top:-15px;">
+					                    <span style="margin-right:15px;" id="jml_program_apbd">0 Program</span>
+					                    <span id="jml_kegiatan_apbd">0 Kegiatan</span>
+					                </div>
+					            </div>
+					            <div class="row" style="margin-top:-15px;">
+					                <div class="col-xs-6"><div id="pie-dana" style="height:150px;"></div></div>
+					                <div class="col-xs-6"><div id="pie-kegiatan" style="height:150px;"></div></div>
+					            </div>
+					            <div class="row">
+					                <div class="col-sm-12" style="padding:0 10px;text-align:left;">
+					                    <table style="width:100%;font-size:11px;" id="list_sebaran_bidang">
+
+					                    </table>
+					                </div>
+					            </div>
+					            <br/>
+					            <div class="row" style="margin-top:-15px;">
+					                <div class="col-sm-12">
+					                    <div class="extra" style="font-size:20px;font-weight:bold;">Sebaran Kegiatan per Bidang</div>
+					                    <div id="chart-subbidang" style="height:195px;margin-top:5px;"></div>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="col-sm-6" style="position:relative;">
+					            <div class="row">
+					                <div class="col-sm-12">
+					                    <div style="overflow:hidden;color:#575757;text-align:left;">
+					                        <span style="font-size:20px;font-weight:bold;" class="extra">Deviasi</span>
+					                        <span style="font-size:11px;">Serapan Anggaran</span>
+					                    </div>
+					                    <div id="chart-deviasi" style="height:300px;"></div>
+					                </div>
+					            </div>
+					            <br/>
+					            <div class="row" style="margin:-20px -5px 0;">
+					                <div class="col-sm-4" style="padding:5px;">
+					                    <div class="box" style="background:#606062;color:#fff;padding:8px;border-top:5px solid #CC66FF;border-radius:5px;">
+					                        <div class="extra" style="font-size:16px;">TOTAL DEVIASI</div>
+					                        <div style="font-size:13px;" class="periode_1">s/d Jan 2016</div>
+					                        <div style="overflow:hidden;margin-top:-5px;">
+					                            <div class="extra" style="font-size:25px;" id="prosentase_deviasi"> 0.00%</div>
+					                            <div style="margin-top:-2px;font-size:11px;text-align:right;" id="nilai_deviasi">
+					                                Rp. 0,00 <br/> dari<br/> Rp. 0,00
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+					                <div class="col-sm-4" style="padding:5px;">
+					                    <div class="box" style="background:#606062;color:#fff;padding:8px;border-top:5px solid #589887;border-radius:5px;">
+					                        <div class="extra" style="font-size:16px;">TOTAL EFISIENSI</div>
+					                        <div style="font-size:13px;" class="periode_1">s/d Sept 2016 </div>
+					                        <div style="overflow:hidden;margin-top:-5px;">
+					                            <div class="extra" style="font-size:25px;" id="prosentase_efisiensi"> 0.00%</div>
+					                            <div style="margin-top:-2px;font-size:11px;text-align:right;" id="nilai_efisiensi">
+					                                Rp. 0,00 <br/> dari<br/> Rp. 0,00
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+					                <div class="col-sm-4" style="padding:5px;">
+					                    <div class="box" style="text-align:center;background:#606062;color:#fff;padding:12px 8px;border-top:5px solid #E9C14F;border-radius:5px;">
+					                        <div class="media">
+					                            <div class="media-body media-middle text-left">
+					                                <div class="extra" style="font-size:12px;">Belum Terlaksana</div>
+					                                <div style="font-size:12px;" id="nilai_blm_terlaksana">Rp. 0,00</div>
+					                            </div>
+					                            <div class="media-right media-middle">
+					                                <div style="font-size:25px;" id="prosentase_blm_terlaksana">0.00%</div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                    <div class="box" style="text-align:center;background:#606062;color:#fff;padding:12px 8px;border-top:5px solid #DE5741;border-radius:5px;margin-top:5px;">
+					                        <div class="media">
+					                            <div class="media-body media-middle text-left">
+					                                <div class="extra" style="font-size:12px;">Belum SPJ</div>
+					                                <div style="font-size:12px;" id="nilai_blm_spj">Rp. 0.00</div>
+					                            </div>
+					                            <div class="media-right media-middle">
+					                                <div style="font-size:25px;" id="prosentase_blm_spj">0.00%</div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					            <br/>
+					            <div class="row" style="margin-top:-10px;">
+					                <div class="col-sm-6">
+					                    <h4 style="margin:0px;">Deviasi Keuangan</h4>
+					                    <p style="margin:0px;">Jumlah Kegiatan per Bidang</p>
+					                    <p style="margin:0px;color:#aaa;" class="periode">Jam 2016</p>
+					                    <div id="chart-deviasi-keuangan" style="height:170px;"></div>
+					                </div>
+					                <div class="col-sm-6">
+					                    <h4 style="margin:0px;">Deviasi Fisik</h4>
+					                    <p style="margin:0px;">Jumlah Kegiatan per Bidang</p>
+					                    <p style="margin:0px;color:#aaa;" class="periode">Jan 2016</p>
+					                    <div id="chart-deviasi-fisik" style="height:170px;"></div>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="col-sm-3">
+					            <div class="row">
+					                <div class="col-xs-6">
+					                    <div style="position:relative">
+					                        <div class="extra" style="font-size:20px;">TARGET</div>
+					                        <div class="extra" style="font-size:15px;margin-top:-5px;">SERAPAN</div>
+					                        <div class="extra" style="font-size:20px;margin-top:-8px;">BULAN INI</div>
+					                        <div class="extra periode" style="font-size:15px;margin-top:-5px;">Jan 2016</div>
+					                        <br/>
+					                        <div id="target_bulan_ini">Target : Rp. 0 M </div>
+					                        <div id="serapan_bulan_ini">Serapan : Rp. 0 M </div>
+					                    </div>
+					                </div>
+					                <div class="col-xs-6">
+					                    <div class="circliful" data-dimension="120" data-text="0%" data-width="20" data-fontsize="25" data-percent="0" data-fgcolor="#509785" data-bgcolor="#74C3AD" data-total="100" data-part="0" style="width: 120px;">
+					                    </div>
+					                </div>
+					            </div>
+					            <hr style="border:none;border-bottom:3px dashed #606062" />
+					            <div class="row">
+					                <div class="col-sm-12">
+					                    <div class="media">
+					                        <div class="extra media-left" style="font-size:20px;">TOTAL</div>
+					                        <div class="media-body" style="font-size:16px;line-height:16px;padding-top:10px;">Sisa Dana Belum Terserap</div>
+					                    </div>
+					                    <div style="font-size:30px;margin-top:-5px;" id="sisa_serapan"> 0 M </div>
+					                    <div style="font-size:20px;margin-top:-10px;"> Sisa waktu yang tersedia </div>
+					                    <div style="font-size:30px;margin-top:-4px;" id="sisa_waktu"> 0 Hari </div>
+					                </div>
+					            </div>
+					            <hr style="border:none;border-bottom:3px dashed #606062;margin:5px 0 15px" />
+					            <div class="row">
+					                <div class="col-sm-12" style="position:relative;">
+					                    <div class="extra" style="font-size:20px;">5 REALISASI TERBARU</div>
+					                    <div class="clock" style="position:absolute;top:-50px;right:10px;"></div>
+					                    <div style="overflow:hidden;height:200px;margin-top:10px;position:relative;">
+					                        <div class="marquee" id="list_realisasi">
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="clearfix"></div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content form-modal-content scroll">
+				</div>
+			</div>
+		</div>
+
+		<div class="page-loading">
+			Loading Data..
+		</div>
+		
+		<script src="static/plugins/highcharts/jquery.circliful.min.js"></script>
+		<script src="static/plugins/highcharts/highcharts.js"></script>
+
+		<script lang="javascript">
+			$(document).ready(function(){
+				$('.sidebar-toggler-button').click(function(){
+					if($('#sidebar-mobile').hasClass('active')){
+						$('#sidebar-mobile').removeClass('active');
+					} else {
+						$('#sidebar-mobile').addClass('active');
+					}
+					return false;
+				});
+				$('.sidebar-mobile-overlay').click(function() {
+					$('#sidebar-mobile').removeClass('active');
+				});
+				refresh();
+
+				Highcharts.setOptions({
+				    lang: {
+				        decimalPoint: ',',
+				        thousandsSep: '.'
+				    },
+
+				    tooltip: {
+				        yDecimals: 2,
+				    }
+				});
+			});
+
+			function color(i)
+			{
+				var warna;
+				warna = ['#34332F', '#3498db', '#DB4F38', '#FB8E2F', '#6EC1B9', '#599988', '#EEC724', '#61594C'];
+				return warna[i];
+			}
+
+			function chartDeviasi(data)
+			{
+				var bulan=[],target=[],efisiensi=[],serapan=[],blm_terlaksana=[],blm_spj=[];
+				for(i=0;i<data.length;i++){
+				    bulan[i] 			= data[i].bulan;
+				    target[i]			= parseFloat(data[i].target);
+				    efisiensi[i]		= parseFloat(data[i].efisiensi);
+				    serapan[i]			= parseFloat(data[i].serapan);
+				    blm_terlaksana[i]	= parseFloat(data[i].belum_dilaksanakan);
+				    blm_spj[i]			= parseFloat(data[i].belum_spj);
+				}
+
+				$('#chart-deviasi').highcharts({
+			        chart: {
+			            type: 'areaspline'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: bulan,
+			            crosshair: true,
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                },
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:true,
+			            layout: 'horizontal',
+			    		align: 'center',
+			        	verticalAlign: 'bottom',
+			            floating: false,
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="background:{series.color};width:5px;">&nbsp;</td><td style="padding:0 0 0 5px;">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y} Juta</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true,
+			        },
+			        plotOptions: {
+			            areaspline: {
+			                lineWidth:'0',
+			                marker:{
+			                    enabled:false
+			                },
+			                dataLabels: {
+			                    enabled: false,
+			                    rotation:-90,
+			                    x:0,
+			                    y:-10,
+			                    verticalAlign:'bottom',
+			                    align:'center',
+			                    inside:false,
+			                    color:'#333',
+			                    style: {
+							        color: '#000',
+							        fontSize: '10'
+							    },
+			                },
+			                enableMouseTracking: true,
+			            }
+			        },
+			        series: [
+			        {
+			            name: 'Target',
+			            color:'#9DD6C7',
+			            data: target
+			        },
+			        {
+			            name: 'Serapan',
+			            color:'#74C3AD',
+			            data: serapan
+			        },
+			        {
+			            name: 'Efisiensi',
+			            color:'#529880',
+			            data: efisiensi
+			        },
+			        {
+			            name: 'Belum Terlaksana',
+			            color:'#F4C038',
+			            data: blm_terlaksana
+
+			        },{
+			            name: 'Belum SPJ',
+			            color:'#E9533B',
+			            data: blm_spj
+
+			        }]
+			    });
+			}
+
+			function chartDeviasiFisik(data)
+			{
+				var nama=[];
+				for(i=0;i<data.length;i++){
+				    nama[i] 		= data[i].nama_singkat;
+				    data[i].name 	= data[i].nama;
+				    data[i].y 		= parseInt(data[i].jml_kegiatan);
+				    data[i].color 	= color(i);
+				}
+
+				$('#chart-deviasi-fisik').highcharts({
+			        chart: {
+			            type: 'bar'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: nama,
+			            crosshair: true,
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#575757',
+			                    fontWeight:'bold',
+			                    fontSize:'11'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                enabled:false,
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:false
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true,
+			            enabled:false
+			        },
+			        plotOptions: {
+			            series: {
+			                stacking: 'normal'
+			            },
+			            bar: {
+			                borderWidth:'0',
+			                marker:{
+			                    enabled:false
+			                },
+			                dataLabels: {
+			                    enabled: true,
+			                    x:15,
+			                    y:0,
+			                    verticalAlign:'middle',
+			                    align:'right',
+			                    inside:false,
+			                    padding:0,
+			                    crop:false,
+			                    color:'#333',
+			                    overflow: 'none'
+			                },
+			                enableMouseTracking: false
+			            }
+			        },
+			        series: [
+			        {
+			            name: 'Deviasi Fisik',
+			            color:'#3498db',
+			            data: data
+			        }]
+			    });
+			}
+
+			function chartDeviasiKeuangan(data)
+			{
+				var nama=[];
+				for(i=0;i<data.length;i++){
+				    nama[i] 		= data[i].nama_singkat;
+				    data[i].name 	= data[i].nama;
+				    data[i].y 		= parseInt(data[i].jml_kegiatan);
+				    data[i].color 	= color(i);
+				}
+
+				$('#chart-deviasi-keuangan').highcharts({
+			        chart: {
+			            type: 'bar'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: nama,
+			            crosshair: true,
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#575757',
+			                    fontWeight:'bold',
+			                    fontSize:'11'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                enabled:false,
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:false
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true,
+			            enabled:false
+			        },
+			        plotOptions: {
+			            series: {
+			                stacking: 'normal'
+			            },
+			            bar: {
+			                borderWidth:'0',
+			                marker:{
+			                    enabled:false
+			                },
+			                dataLabels: {
+			                    enabled: true,
+			                    x:15,
+			                    y:0,
+			                    verticalAlign:'middle',
+			                    align:'right',
+			                    inside:false,
+			                    padding:0,
+			                    crop:false,
+			                    color:'#333',
+			                    overflow: 'none'
+			                },
+			                enableMouseTracking: false
+			            }
+			        },
+			        series: [
+			        {
+			            name: 'Deviasi Keuangan',
+			            color:'#3498db',
+			            data: data
+			        }]
+			    });	
+			}
+
+			function chartSebaranBidang(data)
+			{
+				for(i=0;i<data.length;i++){
+				    data[i].name 	= data[i].nama;
+				    data[i].y 		= parseInt(data[i].jml_kegiatan);
+				    data[i].color 	= color(i);
+				}
+
+				$('#chart-subbidang').highcharts({
+			        chart: {
+			            type: 'column'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: [],
+			            crosshair: true,
+			            labels:{
+			                enabled:false,
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#aaa',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold',
+			                    fontSize:'11'
+			                },
+			                rotation:-45,
+			                x:-10,
+			                y:30
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:false
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="padding:0"><b> {point.y} </b></td>' +
+			                '<td style="padding-left:5px"><b>{series.name}</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true
+			        },
+			        plotOptions: {
+			            column: {
+			                dataLabels: {
+			                    enabled: true,
+			                    rotation:-90,
+			                    x:3,
+			                    y:-10,
+			                    verticalAlign:'bottom',
+			                    align:'center',
+			                    inside:false,
+			                    color:'#333'
+			                },
+			                enableMouseTracking: true
+			            }
+			        },
+			        series: [
+			        {
+			            name: 'Kegiatan',
+			            data: data
+			        }]
+			    });
+			}
+
+			function chartPieKegiatan(data)
+			{
+				for(i=0;i<data.length;i++){
+				    data[i].name 	= data[i].nama;
+				    data[i].y 		= parseInt(data[i].jml_kegiatan);
+				    data[i].color 	= color(i);
+				}
+
+				$('#pie-kegiatan').highcharts({
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false
+			        },
+			        title: {
+			            text: 'Sebaran Kegiatan',
+			            style:{
+			                    'color':'#575757',
+			                    'fontFamily':'norpeth, sans-serif;',
+			                    'textTransform':'uppercase',
+			                    'fontSize':'12px',
+			                    'fontWeight':'bold'
+			                }
+			        },
+			        tooltip: {
+			            pointFormat: '<b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: false,
+			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                },
+			                borderWidth:0,
+			                showInLegend:false
+			            }
+			        },
+			        legend:{
+			            borderWidth:0
+			        },
+			        series: [{
+			            type: 'pie',
+			            name: 'Deviasi',
+			            innerSize: '50%',
+			            data: data
+			        }]
+			    });
+			}
+
+			function chartPieDana(data)
+			{
+				for(i=0;i<data.length;i++){
+				    data[i].name 	= data[i].nama;
+				    data[i].y 		= parseInt(data[i].jml_anggaran);
+				    data[i].color 	= color(i);
+				}
+
+				$('#pie-dana').highcharts({
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false
+			        },
+			        title: {
+			            text: 'Sebaran Dana',
+			            style:{
+			                    'color':'#575757',
+			                    'fontFamily':'norpeth, sans-serif;',
+			                    'textTransform':'uppercase',
+			                    'fontSize':'12px',
+			                    'fontWeight':'bold'
+			                }
+			        },
+			        tooltip: {
+			            pointFormat: '<b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: false,
+			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                },
+			                borderWidth:0,
+			                showInLegend:false
+			            }
+			        },
+			        legend:{
+			            borderWidth:0
+			        },
+			        series: [{
+			            type: 'pie',
+			            name: 'Deviasi',
+			            innerSize: '50%',
+			            data: data,
+			        }]
+			    });	
+			}
+
+			function loadData(loader)
+			{
+				if(loader) $('.page-loading').fadeIn();
+				
+				$.ajax({
+			        url: 'http://bappeda.jogjaprov.go.id/si_internal/api/dashboard',
+			        type: "post",
+			        data: {'access-token' : '134UvLg7QilJxg/8CXZVKp0.f1WZn7puwLy2LYgzaiB7Zh61eUYSl72'},
+					async: true,
+			        dataType: "json",
+			        success: function(data) {
+			        	chartDeviasi(data.deviasi);
+			        	chartPieDana(data.program_kegiatan);
+			        	chartDeviasiFisik(data.deviasi_fisik);
+			        	chartPieKegiatan(data.program_kegiatan);
+			        	chartSebaranBidang(data.kegiatan_bidang);
+			        	chartDeviasiKeuangan(data.deviasi_keuangan);
+
+			        	$('#title_apbd').html(data.target_apbd['title']);
+			        	$('#jml_program_apbd').html(data.target_apbd['jml_program'] + ' Program');
+			        	$('#jml_kegiatan_apbd').html(data.target_apbd['jml_kegiatan'] + ' Kegiatan');
+			        	$('#jml_apbd').html(data.target_apbd['jml_apbd'] + ' M');
+			        	$('.periode_1').html('s/d '+ data.total_deviasi['periode']);
+			        	$('.periode').html(data.total_deviasi['periode']);
+			        	$('#prosentase_deviasi').html(data.total_deviasi['prosentase']+'%');
+			        	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+" <br> dari <br> Rp. "+data.total_deviasi['target']);
+			        	$('#prosentase_efisiensi').html(data.total_efisiensi['prosentase']+'%');
+			        	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+" <br> dari <br> Rp. "+data.total_efisiensi['target']);
+			        	$('#nilai_blm_terlaksana').html('Rp. '+data.total_blm_terlaksana['nilai']);
+			        	$('#prosentase_blm_terlaksana').html(data.total_blm_terlaksana['prosentase']+'%');
+			        	$('#nilai_blm_spj').html('Rp. '+data.total_blm_spj['nilai']);
+			        	$('#prosentase_blm_spj').html(data.total_blm_spj['prosentase']+'%');
+			        	$('#target_bulan_ini').html('Target : Rp. '+data.target_serapan['target']);
+			        	$('#serapan_bulan_ini').html('Serapan : Rp. '+data.target_serapan['serapan']);
+			        	$('#sisa_serapan').html('Rp. '+data.target_serapan['sisa_dana']);
+			        	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari');
+			        	$('.circliful').find('span').remove();
+			        	$('.circliful').find('canvas').remove();
+			        	$('.circliful').attr('data-text', parseInt(data.target_serapan['prosentase'])+'%');
+			        	$('.circliful').attr('data-part', parseInt(data.target_serapan['prosentase']));
+			        	$('.circliful').attr('data-percent', parseInt(data.target_serapan['prosentase']));
+			        	$('.circliful').circliful();
+
+			        	$('#list_sebaran_bidang').find('tr').remove();
+			        	$.each(data.program_kegiatan, function(i, field){
+			        		var row = '<tr>'
+				                        +'<td width="15"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
+				                        +'<td>'+ field.nama_singkat +'</td>'
+				                        +'<td class="text-right">Rp. '+ field.jml_anggaran +'. '+ field.jml_program +' Program '+ field.jml_kegiatan +' Kegiatan</td>'
+				                    	+'</tr>';
+
+			        		$('#list_sebaran_bidang').append(row);
+			        	});
+
+			        	$('#list_realisasi').parent().find('.media-0').remove();
+			        	$('#list_realisasi').find('.media').remove();
+			        	if(data.realisasi_terbaru){
+				        	$.each(data.realisasi_terbaru, function(i, field){
+				        		var row = '<div class="media">'
+				                                +'<div class="media-left"><div style="width:15px;height:15px;border-radius:50em;background:#509785;"></div></div>'
+				                                +'<div class="media-body text-left">'
+				                                    +'<div>'+ field.nama_kegiatan +'</div>'
+				                                    +'<div>Rp. '+ field.total_realisasi +'</div>'
+				                                    +'<div>'+ field.nama_sub_bidang +'</div>'
+				                                +'</div>'
+				                            +'</div>';
+
+				        		$('#list_realisasi').append(row);
+				        	});
+				        } else {
+				        	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:25px;">Tidak ada data realisasi</div>');
+				        }
+
+						closeModal();
+			        },
+			        error: function (textStatus, errorThrown) {
+						closeModal();
+		                noticeFailed('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server.');
+		            }
+			    });
+			}
+
+			function closeModal(){
+				setTimeout(function(){
+					$('.page-loading').fadeOut();
+				}, 2000);
+			}
+
+		</script>
+	</body>
+</html>

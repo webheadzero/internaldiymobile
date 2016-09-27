@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <title>Sistem Informasi Internal</title>
+	    <meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+	    <link href="static/fonts/norpeth/stylesheet.css" rel="stylesheet">
+		<link href="static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/jmc_layout.css" rel="stylesheet">
+		<link href="static/css/jmc_widget.css" rel="stylesheet">
+		<link href="static/css/jmc_theme.css" rel="stylesheet">
+		<link href="static/css/jmc_responsive.css" rel="stylesheet">
+		<link href="static/plugins/sweet-alert/sweet-alert.css" rel="stylesheet">
+		<script src="static/js/jquery-1.12.0.min.js"></script>
+		<script src="static/js/jquery-migrate-1.3.0.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+		<script src="static/js/jquery.cookie.js"></script>
+		<script src="static/js/application.js"></script>
+		<script src="static/plugins/sweet-alert/sweet-alert.min.js"></script>
+		<style type="text/css">
+		    .dashboard{ font-family: "norpeth" }
+		    .extra{ font-family: "norpeth-extrabold", sans-serif; }
+		    .ultra{ font-family: "norpeth-ultra", sans-serif; }
+		    .img-circle { height:70px;width:70px;padding-top:6px; }
+		</style>
+		<script type="text/javascript">
+			function refresh(loader='true')
+			{
+				loadData(loader);
+
+				setTimeout(function(){
+					refresh(false);
+				}, 30000);
+			}
+		</script>
+	</head>
+	<body class="fullpage">
+		<div id="sidebar-mobile">
+			<div class="sidebar-mobile-overlay"></div>
+			<div class="sidebar-mobile-content">
+				<div class="sidebar-mobile-head">
+					<img src="icon.png">
+	                <h4>SI Internal</h4>
+	                <h3>EKSEKUTIF</h3>
+				</div>
+				<ul class="sidebar-mobile-menu">
+					<li><a href="general.html"><i class="fa fa-line-chart"></i> Dashboard Internal</a></li>
+					<li><a href="keuangan.html"><i class="fa fa-bar-chart"></i> Eksekutif Keuangan</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="page" class="layout">
+		    <div id="jmc_body" class="layout layout-center">
+		        <div id="jmc_navbar" class="navbar layout layout-north">
+		        	<a href="#" class="sidebar-toggler-button"><span class="bar"></span></a>
+		            <div class="navbar-header">
+		                <a class="navbar-brand" href="./">Eksekutif Keuangan</a>
+		            </div>
+		            <div class="clearfix"></div>
+		        </div>
+		        <div class="layout layout-center"  id="wrapper">
+				<div id="contentpane" class="layout layout-center scroll dashboard" style="padding:15px;color:#575757;text-align: center;">
+			    <div class="row">
+			        <div class="col-sm-3">
+
+			            <div class="col-xs-12 col-sm-12" id="dashboard-logo">
+			                <div style="font-size:15px;font-weight:bold;text-align:left;" class="extra">Pengajuan NPD</div>
+			                <div style="font-size:22px;font-weight:bold;text-align: right;" class="extra" id="jml_pengajuan_npd_rp"> Rp. 0,00 </div>
+			                <div style="text-align:right;color:#aaa;position:relative;margin-top:0;">
+			                	<span style="margin-right:13px;" id="jml_pengajuan_npd"> 0 NPD </span>
+			                </div>
+			            </div>
+
+			            <div class="col-xs-12 col-sm-12" id="dashboard-logo">
+			                <div style="font-size:15px;font-weight:bold;text-align:left;" class="extra">Realisasi NPD</div>
+			                <div style="font-size:22px;font-weight:bold;text-align: right;" class="extra" id="jml_realisasi_npd_rp"> Rp. 0,00 </div>
+			                <div style="text-align:right;color:#aaa;position:relative;margin-top:0;">
+			                	<span style="margin-right:13px;" id="jml_realisasi_npd"> 0 NPD </span>
+			                </div>
+			            </div>
+
+			            <div class="col-xs-12 col-sm-12 box" style="margin:6px 0 6px 0;background:#606062;color:#fff;padding:8px;border-top:5px solid #589887;border-radius:5px;">
+			                <div class="extra" style="font-size:14px;">KAS BAPPEDA DIY</div>
+			                <div style="overflow:hidden;margin-top:-5px;">
+			                    <div class="extra" style="font-size:20px;" id="sisa_kas_bappeda"> Rp. 0,00 </div>
+			                    <div style="margin-top:-2px;font-size:11px;text-align:center;"> Dana yang masih di bendahara </div>
+			                </div>
+			            </div>
+
+			            <div class="col-xs-12 col-sm-12 box" style="margin-bottom:6px;background:#606062;color:#fff;padding:8px;border-top:5px solid #CC66FF;border-radius:5px;">
+			                <div class="extra" style="font-size:14px;">KAS DI SUB BIDANG</div>
+			                <div style="overflow:hidden;margin-top:-5px;">
+			                    <div class="extra" style="font-size:20px;" id="kas_disub_bidang"> Rp. 0,00 </div>
+			                    <div style="margin-top:-2px;font-size:13px;text-align:center;">
+			                        <div style="float:left;" id="kas_up_disub_bidang"> UP = Rp. 0,00 </div>
+				                	<div style="float:right;" id="npd_up_disub_bidang"> 0 NPD </div>
+				                	<div style="clear:both;"></div>
+				                	<div style="float:left;" id="kas_tu_disub_bidang"> TU = Rp. 0,00</div>
+				                	<div style="float:right;" id="npd_tu_disub_bidang"> 0 NPD </div>
+			                    </div>
+			                </div>
+			            </div>
+
+						<div class="col-xs-12 col-sm-12 box" style="margin-bottom:6px;background:#606062;color:#fff;padding:8px;border-top:5px solid #E9C14F;border-radius:5px;">
+			                <div class="extra" style="font-size:14px;">KAS YANG BELUM MENERIMA GU</div>
+			                <div style="overflow:hidden;margin-top:-5px;">
+			                    <div class="extra" style="font-size:20px;" id="kas_belum_gu"> RP. 0,00 </div>
+				                <div class="extra" style="font-size:20px;margin-top:-5px;" id="persen_belum_gu"> 0.00% </div>
+				                <div style="margin-top:-2px;font-size:13px;" id="npd_belum_gu"> 0 NPD </div>
+			                </div>
+			            </div>
+
+						<div class="col-xs-12 col-sm-12 box" style="margin-bottom:6px;background:#606062;color:#fff;padding:8px;border-top:5px solid #DE5741;border-radius:5px;">
+			                <div class="extra" style="font-size:14px;">LS BAPPEDA</div>
+			                <div style="overflow:hidden;margin-top:-5px;">
+			                    <div class="extra" style="font-size:20px;" id="ls_bappeda"> RP. 0,00 </div>
+			                    <div style="margin-top:-2px;font-size:13px;text-align:center;" id="npd_ls_bappeda"> 0 NPD </div>
+			                </div>
+			            </div>
+
+			        </div>
+			        <div class="col-sm-5" style="position:relative;">
+			            <div class="row">
+			                <div class="col-sm-12">
+			                    <div class="extra" style="font-size:16px;font-weight:bold;">Kas Di Bidang</div>
+			                    <div id="chart-kas-dibidang" style="height:300px;"></div>
+			                </div>
+			            </div>
+			            <div class="row">
+			                <div class="col-sm-12" style="padding:0 30px;">
+			                    <table style="width:100%;font-size:11px;" class="sebaran_kas_disub_bidang"> </table>
+			                </div>
+			            </div>
+			            <br />
+			            <div id="dashboard-logo" style="color:#575757;font-weight:bold;">
+			        		<div class="col-xs-7 col-sm-8 text-left">
+			        			<div style="font-size:17px;" class="extra">
+			        				KETERLAMBATAN<br>LAPORAN<br>REALISASI
+			        			</div>
+			        		</div>
+			        		<div class="col-xs-4 col-sm-4 text-center text-white">
+			        			<div style="width:150px;">
+			        				<div style="float:left;margin-top:-10px;margin-right:-10px;">
+					        			<div style="background:#c0392b;" class="img-circle">
+					        				<div style="font-size:24px;" class="extra" id="npd_terlambat"> 0 </div>
+					        				<div style="font-size:16px;margin-top:-4px;"> NPD </div>
+					        			</div>
+			        				</div>
+			        				<div style="float:left;margin-top:10px;">
+					        			<div style="background:#1abc9c;" class="img-circle">
+					        				<div style="font-size:24px;" class="extra" id="bidang_terlambat"> 0 </div>
+					        				<div style="font-size:16px;margin-top:-4px;"> BIDANG </div>
+					        			</div>
+			        				</div>
+			        			</div>
+			        		</div>
+			        		<div class="col-xs-1"></div>
+			            </div>
+			        </div>
+			        <div class="col-sm-4">
+			            <div class="extra" style="font-size:16px;font-weight:bold;">Sebaran Transaksi NPD (Rp)</div>
+			            <div id="chart-transaksi" style="height:250px;"></div> 
+			            <br/>    
+			            <div class="extra" style="font-size:16px;font-weight:bold;">Sebaran Transaksi NPD (Buah)</div>
+			            <div id="chart-transaksi-npd" style="height:220px;"></div>            
+			        </div>
+			    </div>
+			</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content form-modal-content scroll">
+				</div>
+			</div>
+		</div>
+
+		<div class="page-loading">
+			Loading Data..
+		</div>
+
+		<script src="static/plugins/highcharts/highcharts.js"></script>
+
+		<script lang="javascript">
+			$(document).ready(function() {
+				$('.sidebar-toggler-button').click(function(){
+					if($('#sidebar-mobile').hasClass('active')){
+						$('#sidebar-mobile').removeClass('active');
+					} else {
+						$('#sidebar-mobile').addClass('active');
+					}
+					return false;
+				});
+				$('.sidebar-mobile-overlay').click(function() {
+					$('#sidebar-mobile').removeClass('active');
+				});
+				refresh();
+
+				Highcharts.setOptions({
+				    lang: {
+				        decimalPoint: ',',
+				        thousandsSep: '.'
+				    },
+				    tooltip: {
+				        yDecimals: 2
+				    }
+				});
+			});
+			
+			function loadData(loader){
+				if(loader) $('.page-loading').fadeIn();
+
+				$.ajax({
+			        url: 'http://bappeda.jogjaprov.go.id/si_internal/api/eksekutif',
+			        type: "post",
+			        data: {'access-token' : '134UvLg7QilJxg/8CXZVKp0.f1WZn7puwLy2LYgzaiB7Zh61eUYSl72'},
+					async: true,
+			        dataType: "json",
+			        success: function(data) {
+			        	chartTransaksiNpd(data.grafikSebaranNpdBuah);
+			        	chartKasDiBidang(data.grafikKasDiBidang);
+			        	chartTransaksi(data.grafikSebaranNpdRp);
+
+			        	$('#jml_pengajuan_npd_rp').html(data.transaksi['jumlah_pengajuan']);
+			        	$('#jml_pengajuan_npd').html(data.transaksi['npd_pengajuan']+' NPD');
+			        	$('#jml_realisasi_npd_rp').html(data.transaksi['jumlah_realisasi']);
+			        	$('#jml_realisasi_npd').html(data.transaksi['npd_realisasi']+' NPD');
+			        	$('#sisa_kas_bappeda').html(data.sisaKas['jumlah_kas']);
+			        	$('#kas_disub_bidang').html(data.kasDiSubBidang['jumlah_total']);
+			        	$('#kas_up_disub_bidang').html('UP = '+ data.kasDiSubBidang['jumlah_up']);
+			        	$('#npd_up_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_up']+' NPD');
+			        	$('#kas_tu_disub_bidang').html('TU = '+ data.kasDiSubBidang['jumlah_tu']);
+			        	$('#npd_tu_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_tu']+' NPD');
+			        	$('#kas_belum_gu').html(data.kasBelumDiGanti['jumlah_total']);
+			        	$('#npd_belum_gu').html(data.kasBelumDiGanti['jumlah_npd']+' NPD');
+			        	$('#persen_belum_gu').html(data.kasBelumDiGanti['jumlah_persen']+' %');
+			        	$('#ls_bappeda').html(data.ls['jumlah_ls']);
+			        	$('#npd_ls_bappeda').html(data.ls['jumlah_npd']+' NPD');
+			        	$('#ls_bappeda').html(data.ls['jumlah_ls']);
+			        	$('#npd_terlambat').html(data.keterlambatan['jumlah_npd']);
+			        	$('#bidang_terlambat').html(data.keterlambatan['jumlah_bidang']);
+
+			        	$('.sebaran_kas_disub_bidang').find('tr').remove();
+			        	$.each(data.sebaranKasDiBidang, function(i, field){
+			        		var row = '<tr>'
+				                            +'<td width="15"><div style="width:10px;height:10px;border-radius:3px;"><li class="fa fa-circle text-danger"></li></div></td>'
+				                            +'<td align="left">'+ field.nama_singkat +'</td>'
+				                            +'<td align="right">'+ field.jumlah_total +'</td>'
+				                            +'<td align="right">'+ field.jumlah_npd +' NPD</td>'
+				                        +'</tr>';
+			        		$('.sebaran_kas_disub_bidang').append(row);
+						});
+						closeModal();
+			        },
+			        error: function (textStatus, errorThrown) {
+						closeModal();
+		                noticeFailed('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server.');
+		            }
+			    });
+			}
+
+			function closeModal(){
+				setTimeout(function(){
+					$('.page-loading').fadeOut();
+				}, 2000);
+			}
+		</script>
+	
+		<script type="text/javascript">
+			function chartTransaksiNpd(data)
+			{				
+				var jumlah=[],
+					bulan=[];
+
+				for(i=0;i<12;i++){
+					bulan[i]	= data.bulan[i];
+					jumlah[i] 	= parseInt(data.jumlah[i]);
+				}
+
+				$('#chart-transaksi-npd').highcharts({
+			        chart: {
+			            type: 'areaspline'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: bulan,
+			            crosshair: true,
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:false
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y} Buah</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true,
+			        },
+			        plotOptions: {
+			            areaspline: {
+			                lineWidth:'0',
+			                marker:{
+			                    enabled:false
+			                }
+			            }
+			        },
+			        series: [
+			        {
+			            name: 'NPD',
+			            color:'#3498db',
+			            data: jumlah
+			        }]
+			    });
+			}
+
+			function chartTransaksi(data)
+			{
+				var realisasi=[], 
+					pengajuan=[], 
+					bulan=[];
+
+				for(i=0;i<12;i++){
+					bulan[i]		= data.bulan[i];
+					realisasi[i]	= parseInt(data.realisasi[i]);
+					pengajuan[i] 	= parseInt(data.pengajuan[i]);
+				}
+
+				$('#chart-transaksi').highcharts({
+			        chart: {
+			            type: 'areaspline'
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: bulan,
+			            crosshair: true,
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                },
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:true,
+			            layout: 'horizontal',
+			    		align: 'center',
+			        	verticalAlign: 'bottom',
+			            floating: false,
+			        },
+			        tooltip: {
+			        	valuePrefix: 'Rp. ',
+				  		valueSuffix: ',00',
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			            pointFormat: '<tr><td style="background:{series.color};width:5px;">&nbsp;</td><td style="padding:0 0 0 5px;">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true,
+			        },
+			        plotOptions: {
+			            areaspline: {
+			                lineWidth:'0',
+			                marker:{
+			                    enabled:false
+			                },
+			                dataLabels: {
+			                    enabled: false,
+			                    rotation:-90,
+			                    x:0,
+			                    y:-10,
+			                    verticalAlign:'bottom',
+			                    align:'center',
+			                    inside:false,
+			                    color:'#333',
+			                    style: {
+							        color: '#000',
+							        fontSize: '10'
+							    },
+			                },
+			                enableMouseTracking: true,
+			            }
+			        },
+			        series: [
+				        {
+				            name: 'Realisasi',
+				            color:'#2ecc71',
+				            data: realisasi
+				        },
+			        	{ 
+			        		name: 'Pengajuan', 
+			        		color:'#3498db', 
+			        		data: pengajuan
+			        	},
+				    ]
+			    });
+			}
+
+			function chartKasDiBidang(data)
+			{
+				var up=[], 
+					tu=[], 
+					bidang=[];
+
+				for(i=0;i<data.length;i++){
+					bidang[i] 	= data[i].nama_singkat;
+					up[i] 		= parseInt(data[i].jumlah_up);
+					tu[i] 		= parseInt(data[i].jumlah_tu);
+				}
+				
+				$('#chart-kas-dibidang').highcharts({
+			    	colors: ["#d35400", "#1abc9c"],
+			        chart: {
+			            type: 'column',
+			        },
+			        title: {
+			            text: '',
+			            style:{
+			                fontFamily:'norpeth',
+			                color:'#333',
+			                textTransform:'uppercase',
+			                fontWeight:'bold'
+			            }
+			        },
+			        xAxis: {
+			            title:{
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            categories: bidang,
+			            crosshair: true,
+			            labels:{
+			                enabled:true,
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#aaa',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold',
+			                    fontSize:'11'
+			                },
+			                rotation:-30,
+			                x:0,
+			                y:13
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        yAxis: {
+			            min: 0,
+			            title: {
+			                text: '',
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            labels:{
+			                style:{
+			                    fontFamily:'norpeth',
+			                    color:'#333',
+			                    textTransform:'uppercase',
+			                    fontWeight:'bold'
+			                }
+			            },
+			            gridLineWidth:0,
+			            lineWidth:2,
+			            lineColor:'#3F3F3F',
+			            gridLineColor:'#eee'
+			        },
+			        legend:{
+			            enabled:true,
+			            layout: 'horizontal',
+			    		align: 'right',
+			        	verticalAlign: 'top',
+			            floating: true,
+			        },
+			        tooltip: {
+			        	valuePrefix: 'Rp. ',
+				  		valueSuffix: ',00',
+			        },
+			        plotOptions: {
+			        	column: {
+			                stacking: 'normal'
+			            }
+			        },
+			        series: [{
+			        	name: "UP",
+			        	data: up,
+			        },{
+			        	name: "TU",
+			        	data: tu,
+			        }]
+			    });
+			}
+		</script>
+	</body>
+</html>
