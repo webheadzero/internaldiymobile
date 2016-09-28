@@ -37,42 +37,36 @@ body{
 		transform:translate(-50%,50px);
 		-webkit-transform:translate(-50%,50px);
 		opacity: 0;
-		width: 40%;
-		margin-top:-20%;
+		margin-top:-100px;
 		transition:all 500ms ease-out;
 		-webkit-transition:all 500ms ease-out;
 		transition-delay:500ms;
 		-webkit-transition-delay:500ms;
 	}
 	#gear-icon{
-		height: auto;
 		position:absolute;
 		top:50%;
 		left:50%;
 		transform:translate(-50%,50px);
 		-webkit-transform:translate(-50%,50px);
 		opacity: 0;
-		width: 15%;
-		margin-top:-20%;
-		margin-left:-20%;
 		z-index: 2;
+		margin-top: -100px;
+		margin-left:-50px;
 		transition:all 500ms ease-out;
 		-webkit-transition:all 500ms ease-out;
 		transition-delay:600ms;
 		-webkit-transition-delay:600ms;
 	}
 	#gear2-icon{
-		height: auto;
 		position:absolute;
 		top:50%;
 		left:50%;
 		transform:translate(-50%,50px);
 		-webkit-transform:translate(-50%,50px);
+		margin-top: -150px;
+		margin-left:50px;
 		opacity: 0;
-		width: 30%;
-		margin-top:-35%;
-		margin-left:20%;
-		z-index: -1;
 		transition:all 500ms ease-out;
 		-webkit-transition:all 500ms ease-out;
 		transition-delay:700ms;
@@ -88,7 +82,7 @@ body{
 		font-size: 1.3em;
 		text-align: center;
 		opacity: 0;
-		margin-top:13%;
+		margin-top:-10px;
 		transition:all 500ms ease-out;
 		-webkit-transition:all 500ms ease-out;
 		transition-delay:800ms;
@@ -309,8 +303,8 @@ body{
 		bottom:0;
 		right:60px;
 		background:#1C1E2A;
-		transform: translateX(-100%);
-		-webkit-transform: translateX(-100%);
+		transform: translate(-100%,0);
+		-webkit-transform: translate(-100%,0);
 		transition: all 300ms ease-out;
 		-webkit-transition: all 300ms ease-out;
 		.sidebar-mobile-head{
@@ -374,8 +368,8 @@ body{
 			opacity: 1;
 		}
 		.sidebar-mobile-content{
-			transform:translateX(0);
-			-webkit-transform:translateX(0);
+			transform:translate(0,0);
+			-webkit-transform:translate(0,0);
 		}
 	}
 }
