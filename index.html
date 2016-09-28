@@ -1,88 +1,71 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	    <meta charset="utf-8">
-	    <title>Sistem Informasi Internal</title>
-	    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-	    <meta name="viewport" content="width=device-width" />
-	    <meta name="apple-mobile-web-app-capable" content="yes">
-	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	    <link href="static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="static/css/jmc_login.css" rel="stylesheet">
-		<link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<script src="static/js/jquery-1.12.0.min.js"></script>
-		<script src="static/js/jquery-migrate-1.3.0.min.js"></script>
-		<script src="static/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				setTimeout(function(){
-					$('.page-loading').fadeOut();
-				}, 1700);
-			});
-		</script>
-	</head>
-	<body>
-        <div class="page-loading">
-            <div class="loader-box">
-                <div class="loader"></div>
-                <span>loading..</span>
-            </div>
-        </div>
-        <div id="app">
-            <div class="app-info">
-                <img src="icon.png">
-                <h4>SI Internal</h4>
-                <h3>EKSEKUTIF</h3>
-            </div>
-            <div class="app-button">
-                <a href="general.html" class="blue"><i class="fa fa-line-chart"></i> Dashboard Internal</a>
-                <a href="keuangan.html" class="green"><i class="fa fa-bar-chart"></i> Eksekutif Keuangan</a>
-            </div>
-        </div>
-        <!--
-		<div class="login-container">
-        <hr style="border-top:none;margin: 4em 0;padding:0;"/>
-        <h1 class="logo-title text-shadow-2">EKSEKUTIF SI INTERNAL</h1>
-        <hr style="border-top:none;margin: 4em 0;padding:0;"/>
-        <div class="box">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="form-group">
-                	<a href="general.html">
-                		<button class="btn-signin btn-primary btn-block active text-left zDepth-5">
-                			<i class="fa fa-line-chart fa-2x"></i>
-                			<span class="text-shadow-2" style="margin-left:5%;"> DASHBOARD </span>
-                		</button>
-                	</a>
-                </div>
-                <hr style="border-top:none;margin: 3em 0;padding:0;"/>
-                <div class="form-group">
-                	<a href="keuangan.html">
-                		<button class="btn-signin btn-danger btn-block active text-left zDepth-5">
-                			<i class="fa fa-bar-chart fa-2x"></i>
-                			<span class="text-shadow-2" style="margin-left:5%;"> EKSEKUTIF KEUANGAN </span>
-                		</button>
-                	</a>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="container-liquid" style="margin:0px; padding: 0px">
-		</div>
-        </div>
-    </div>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
 
-    <div class="clearfix"></div>
-    
-    <div class="page-loading">
-		<div class="text-loading">
-			<img src="static/images/preloader.gif"/> <br><br> Loading....
-		</div>
-	</div>
-    
-    <div class="footer" style="bottom: 0px;">
-    	<img src="static/images/logo-diy.png" style="height:60px;margin-bottom:5px;"><br />
-    	<img src="static/images/logo baru jogja.png" style="width:90px;margin-right:5px;">
-        <img src="static/images/jmc-footer.png" style="width:90px;margin-left:5px;">
-    </div>
-    -->
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'default-src'; media-src *">
+        -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <title>SI Internal Bappeda DIY</title>
+    </head>
+    <body>
+        <div class="app-start">
+            <div class="logo">
+                <img src="img/statistics.png">
+                <h4>SI Internal</h4>
+                <h3>BAPPEDA DIY</h3>
+            </div>
+            <a href="dashboard.html" class="button-start btn">Masuk</a>
+        </div>
+
+        <script type="text/javascript">
+            $(function(){
+                setTimeout(function(){
+                    $('.app-start').addClass('in');
+                }, 300);
+
+                $('.button-start').click(function(){
+                    $('.app-start').removeClass('in').addClass('out').delay(500).fadeIn(function(){
+                        location.href="dashboard.html"
+                    });
+                    return false;
+                });
+                 $('.btn').click(function(){
+                        nativeclick.trigger();
+                });
+            });
+        </script>
     </body>
 </html>
