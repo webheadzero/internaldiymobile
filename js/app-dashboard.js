@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    $('#sidebar-toggler-button').click(function(){
+        if($('#sidebar-mobile').hasClass('active')){
+            $('#sidebar-mobile').removeClass('active');
+        } else {
+            $('#sidebar-mobile').addClass('active');
+        }
+        return false;
+    });
+    $('.sidebar-mobile-overlay').click(function() {
+        $('#sidebar-mobile').removeClass('active');
+    });
 	//refresh();
 	loadData();
 	Highcharts.setOptions({

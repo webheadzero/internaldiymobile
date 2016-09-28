@@ -42,11 +42,10 @@
     </head>
     <body>
         <div class="app-start">
-            <div class="logo">
-                <img src="img/statistics.png">
-                <h4>SI Internal</h4>
-                <h3>BAPPEDA DIY</h3>
-            </div>
+            <img src="img/desktop.svg" id="desktop-icon" alt="">
+            <img src="img/gear.svg" id="gear-icon" alt="">
+            <img src="img/gear.svg" id="gear2-icon" alt="">
+            <h4>SI INTERNAL BAPPEDA</h4>
             <a href="dashboard.html" class="button-start btn">Masuk</a>
         </div>
 
@@ -57,14 +56,14 @@
                 }, 300);
 
                 $('.button-start').click(function(){
-                    $('.app-start').removeClass('in').addClass('out').delay(500).fadeIn(function(){
+                    $('.app-start').addClass('out').delay(500).fadeIn(function(){
                         location.href="dashboard.html"
                     });
                     return false;
                 });
-                 /*$('.btn').click(function(){
+                 $('.btn').click(function(){
                         nativeclick.trigger();
-                });*/
+                });
             });
         </script>
     </body>

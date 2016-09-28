@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'default-src'; media-src *">
+        -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta name="theme-color" content="#3498db" />
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="plugins/highcharts/jquery.circliful.min.js"></script>
+        <script type="text/javascript" src="plugins/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="js/app-eksekutif.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <title>SI Internal Bappeda DIY</title>
+    </head>
+    <body>
+        <div id="sidebar-mobile">
+            <div class="sidebar-mobile-overlay"></div>
+            <div class="sidebar-mobile-content">
+                <div class="sidebar-mobile-head">
+                    <img src="img/logo-diy.png">
+                    <div style="font-size:1em">SI INTERNAL</div>
+                    <div style="font-size:0.8em">Bappeda Daerah Istimewa Yogyakarta</div>
+                </div>
+                <ul class="sidebar-mobile-menu">
+                    <li><a href="dashboard.html"><i class="md md-equalizer"></i> Dashboard Internal</a></li>
+                    <li><a href="eksekutif.html"><i class="md md-dvr"></i> Eksekutif Keuangan</a></li>
+                </ul>
+                <div id="jmc-footer">
+                    <img src="img/jmc.png" id="jmc">
+                </div>
+            </div>
+        </div>
+        <div class="app-dashboard">
+            <div class="app-header">
+                <button type="button" class="btn btn-left" id="sidebar-toggler-button"><i class="md md-menu"></i></button>
+                <div class="app-title">Eksekutif Keuangan</div>
+                <button type="button" class="btn btn-right" onclick="loadData();"><i class="md md-refresh"></i></button>
+            </div>
+            <div class="app-content">
+                <div id="dashboard-logo" style="color:#fff;padding:15px 30px;">
+                    <div style="font-size:1em;margin-bottom:5px;">Pengajuan NPD</div>
+                    <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:2em;"></div>
+                    <div id="jml_pengajuan_npd" class="font-thin" style="font-size:1em;"></div>
+                    <br/>
+                    <div style="font-size:1em;margin-bottom:5px;">Realisasi NPD</div>
+                    <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:2em;"></div>
+                    <div id="jml_realisasi_npd" class="font-thin" style="font-size:1em;"></div>
+                </div>
+                <div style="padding:15px 10px;">
+                    <div class="card">
+                        <div class="card-heading">KAS BAPPEDA DIY</div>
+                        <div class="card-body">
+                            <div id="sisa_kas_bappeda" style="font-size:1.4em"></div>
+                            <br/>
+                            <div>Dana yang masih di bendahara</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">KAS DI SUB BIDANG</div>
+                        <div class="card-body">
+                            <div id="kas_disub_bidang" style="font-size:1.4em"></div>
+                            <br/>
+                            <div style="text-align:center;overflow: hidden;">
+                                <div style="float:left;" id="kas_up_disub_bidang"> UP = Rp. 0,00 </div>
+                                <div style="float:right;" id="npd_up_disub_bidang"> 0 NPD </div>
+                                <div style="clear:both;"></div>
+                                <div style="float:left;" id="kas_tu_disub_bidang"> TU = Rp. 0,00</div>
+                                <div style="float:right;" id="npd_tu_disub_bidang"> 0 NPD </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">KAS YANG BELUM MENERIMA GU</div>
+                        <div class="card-body">
+                            <div id="kas_belum_gu" style="font-size:1.4em"></div>
+                            <div id="persen_belum_gu" style="font-size:3em;margin:10px 0;"></div>
+                            <div id="npd_belum_gu" style="text-align: right;"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">LS BAPPEDA</div>
+                        <div class="card-body">
+                            <div id="ls_bappeda" style="font-size:1.4em"></div>
+                            <div id="npd_ls_bappeda" style="text-align: right;"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">Kas Di Bidang</div>
+                        <div id="chart-kas-dibidang" style="height:300px;"></div>
+                        <div style="padding:15px">
+                            <table style="width:100%;font-size:11px;" class="sebaran_kas_disub_bidang"> </table>
+                        </div>
+                    </div>                    
+                    <div class="card">
+                        <div class="card-heading">KETERLAMBATAN LAPORAN REALISASI</div>
+                        <div class="card-body" style="overflow: hidden;">
+                            <div style="float: left;height:100px;text-align: center;width: 50%;border-right: 1px solid #eee;padding:30px 0 0;">
+                                <div id="npd_terlambat" style="font-size:3em;"></div>
+                                <div>NPD</div>
+                            </div>
+                            <div style="float: right;height:100px;text-align: center;width: 50%;padding:30px 0 0;">
+                                <div id="bidang_terlambat" style="font-size:3em;"></div>
+                                <div>BIDANG</div>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">Sebaran Transaksi NPD (Rp)</div>
+                        <div id="chart-transaksi" style="height:250px;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">Sebaran Transaksi NPD (Buah)</div>
+                        <div id="chart-transaksi-npd" style="height:220px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
