@@ -23,7 +23,7 @@ $(document).ready(function(){
 	    }
 	});
     $('#sebaran-chart').slick({
-        infinite: false,
+        infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight:false,
@@ -33,8 +33,8 @@ $(document).ready(function(){
         arrows:true,
         pauseOnHover:false,
         swipe:true,
-        prevArrow:'<button type="button" class="slick-arrow prev" style="color:#333;"><i class="md md-arrow_back"></i></button>',
-        nextArrow:'<button type="button" class="slick-arrow next" style="color:#333;"><i class="md md-arrow_forward"></i></button>',
+        prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
+        nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
     });
 
     $('.btn').click(function(){

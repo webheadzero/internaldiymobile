@@ -82,17 +82,20 @@
         </div>
         <div class="app-dashboard">
             <div class="app-header">
-                <button type="button" class="btn btn-left" id="sidebar-toggler-button"><i class="md md-menu"></i></button>
                 <div class="app-title">Dashboard Internal</div>
                 <button type="button" class="btn btn-right" onclick="loadData();"><i class="md md-refresh"></i></button>
             </div>
+            <ul class="app-nav">
+                <li class="active"><a href="dashboard.html" class="btn"><i class="md md-equalizer"></i> Dashboard Internal</a></li>
+                <li><a href="eksekutif.html" class="btn"><i class="md md-dvr"></i> Eksekutif Keuangan</a></li>
+            </ul>
             <div class="app-content">
-                <div id="dashboard-logo" style="color:#fff;padding:15px 30px;">
+                <div id="dashboard-logo" style="color:#fff;padding:50px 30px;text-align: center;">
                     <div id="title_apbd" style="font-size:1.2em;margin-bottom:5px;">APBD 2016</div>
-                    <div id="jml_apbd" class="font-thin" style="font-size:3em;"> 0 M </div>
+                    <div id="jml_apbd" class="font-thin" style="font-size:3em;color:#0A82F6;margin:15px 0;">0 M</div>
                     <div>
-                        <span id="jml_program_apbd" style="margin-right: 10px;">0 Program</span>
-                        <span id="jml_kegiatan_apbd">0 Kegiatan</span>
+                        <span id="jml_program_apbd" style="margin-right: 10px;">0 <small>Program</small></span>
+                        <span id="jml_kegiatan_apbd">0 <small>Kegiatan</small></span>
                     </div>
                 </div>
                 <div style="padding:15px 10px;">

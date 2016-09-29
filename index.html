@@ -40,20 +40,21 @@
         <script type="text/javascript" src="js/index.js"></script>
         <title>SI Internal Bappeda DIY</title>
     </head>
-    <body>
+    <body style="background:#0E0F19;">
         <div class="app-start">
-            <img src="img/desktop.svg" id="desktop-icon" alt="">
-            <img src="img/gear.svg" id="gear-icon" alt="">
-            <img src="img/gear.svg" id="gear2-icon" alt="">
-            <h4>SI INTERNAL BAPPEDA</h4>
+            <div class="intro-text">
+                <h1>Selamat Datang</h1>
+                <h3>Aplikasi Internal</h3>
+                <h4>Bappeda Daerah Istimewa Yogyakarta</h4>
+            </div>
             <a href="dashboard.html" class="button-start btn">Masuk</a>
         </div>
 
         <script type="text/javascript">
             $(function(){
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('.app-start').addClass('in');
-                }, 300);
+                }, 300);*/
 
                 $('.button-start').click(function(){
                     $('.app-start').addClass('out').delay(500).fadeIn(function(){
