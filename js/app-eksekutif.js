@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
     $('#sidebar-toggler-button').click(function(){
         if($('#sidebar-mobile').hasClass('active')){
             $('#sidebar-mobile').removeClass('active');
@@ -10,7 +11,7 @@ $(document).ready(function(){
     $('.sidebar-mobile-overlay').click(function() {
         $('#sidebar-mobile').removeClass('active');
     });
-	//refresh();
+
 	loadData();
 	Highcharts.setOptions({
         lang: {
@@ -41,9 +42,12 @@ $(document).ready(function(){
     });
 	
 });
-function errorAlert(){
+
+function errorAlert()
+{
     $('.error-alert').addClass('in');
 }
+
 function refresh()
 {
 	loadData();
@@ -52,6 +56,7 @@ function refresh()
 		refresh();
 	}, 30000);
 }
+
 function chartTransaksiNpd(data)
 {               
     var jumlah=[],
@@ -386,57 +391,96 @@ function chartKasDiBidang(data)
         }]
     });
 }
+
 function loadData()
 {
-	
+	var data = JSON.parse(window.localStorage.getItem('dataKeuangan'));
+
 	$('.card').addClass('loading');
+	if(data != null){
+		setValue(data);
+
+		setTimeout(function(){
+			$('.card').removeClass('loading');
+		    $('.error-alert').removeClass('in');
+	    }, 1000);
+	}else{
+		saveToLokalData();
+	}
+
+	/*infoUpdate(window.localStorage.getItem('lastUpdateKeuangan'));*/
+}
+
+function saveToLokalData()
+{
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/eksekutif',
         type: "post",
         data: {'access-token' : '134UvLg7QilJxg/8CXZVKp0.f1WZn7puwLy2LYgzaiB7Zh61eUYSl72'},
-        async: true,
+		async: true,
         dataType: "json",
         success: function(data) {
-            $('.card').removeClass('loading');
-            $('.error-alert').removeClass('in');
-            chartTransaksiNpd(data.grafikSebaranNpdBuah);
-            chartKasDiBidang(data.grafikKasDiBidang);
-            chartTransaksi(data.grafikSebaranNpdRp);
+			var currentdate = new Date(); 
+        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
 
-            $('#jml_pengajuan_npd_rp').html(data.transaksi['jumlah_pengajuan']);
-            $('#jml_pengajuan_npd').html(data.transaksi['npd_pengajuan']+' NPD');
-            $('#jml_realisasi_npd_rp').html(data.transaksi['jumlah_realisasi']);
-            $('#jml_realisasi_npd').html(data.transaksi['npd_realisasi']+' NPD');
-            $('#sisa_kas_bappeda').html(data.sisaKas['jumlah_kas']);
-            $('#kas_disub_bidang').html(data.kasDiSubBidang['jumlah_total']);
-            $('#kas_up_disub_bidang').html('UP = '+ data.kasDiSubBidang['jumlah_up']);
-            $('#npd_up_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_up']+' NPD');
-            $('#kas_tu_disub_bidang').html('TU = '+ data.kasDiSubBidang['jumlah_tu']);
-            $('#npd_tu_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_tu']+' NPD');
-            $('#kas_belum_gu').html(data.kasBelumDiGanti['jumlah_total']);
-            $('#npd_belum_gu').html(data.kasBelumDiGanti['jumlah_npd']+' NPD');
-            $('#persen_belum_gu').html(data.kasBelumDiGanti['jumlah_persen']+' %');
-            $('#ls_bappeda').html(data.ls['jumlah_ls']);
-            $('#npd_ls_bappeda').html(data.ls['jumlah_npd']+' NPD');
-            $('#ls_bappeda').html(data.ls['jumlah_ls']);
-            $('#npd_terlambat').html(data.keterlambatan['jumlah_npd']);
-            $('#bidang_terlambat').html(data.keterlambatan['jumlah_bidang']);
-
-            $('.sebaran_kas_disub_bidang').find('tr').remove();
-            $.each(data.sebaranKasDiBidang, function(i, field){
-                var row = '<tr>'
-                                +'<td width="15"><div style="width:10px;height:10px;border-radius:3px;"><li class="fa fa-circle text-danger"></li></div></td>'
-                                +'<td align="left">'+ field.nama_singkat +'</td>'
-                                +'<td align="right">'+ field.jumlah_total +'</td>'
-                                +'<td align="right">'+ field.jumlah_npd +' NPD</td>'
-                            +'</tr>';
-                $('.sebaran_kas_disub_bidang').append(row);
-            });
+        	window.localStorage.setItem('dataKeuangan', JSON.stringify(data));
+        	window.localStorage.setItem('lastUpdateKeuangan', datetime);
+        	loadData();
         },
         error: function (textStatus, errorThrown) {
-            errorAlert();
+        	if(window.localStorage.getItem('dataKeuangan') != null){
+	        	loadData();
+			} else {
+        		errorAlert();
+			}
         }
     }).done(function() {
 
     });
+}
+	
+function setValue(data)
+{
+	chartTransaksiNpd(data.grafikSebaranNpdBuah);
+    chartKasDiBidang(data.grafikKasDiBidang);
+    chartTransaksi(data.grafikSebaranNpdRp);
+
+    $('#jml_pengajuan_npd_rp').html(data.transaksi['jumlah_pengajuan']);
+    $('#jml_pengajuan_npd').html(data.transaksi['npd_pengajuan']+' NPD');
+    $('#jml_realisasi_npd_rp').html(data.transaksi['jumlah_realisasi']);
+    $('#jml_realisasi_npd').html(data.transaksi['npd_realisasi']+' NPD');
+    $('#sisa_kas_bappeda').html(data.sisaKas['jumlah_kas']);
+    $('#kas_disub_bidang').html(data.kasDiSubBidang['jumlah_total']);
+    $('#kas_up_disub_bidang').html('UP = '+ data.kasDiSubBidang['jumlah_up']);
+    $('#npd_up_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_up']+' NPD');
+    $('#kas_tu_disub_bidang').html('TU = '+ data.kasDiSubBidang['jumlah_tu']);
+    $('#npd_tu_disub_bidang').html(data.kasDiSubBidang['jumlah_npd_tu']+' NPD');
+    $('#kas_belum_gu').html(data.kasBelumDiGanti['jumlah_total']);
+    $('#npd_belum_gu').html(data.kasBelumDiGanti['jumlah_npd']+' NPD');
+    $('#persen_belum_gu').html(data.kasBelumDiGanti['jumlah_persen']+' %');
+    $('#ls_bappeda').html(data.ls['jumlah_ls']);
+    $('#npd_ls_bappeda').html(data.ls['jumlah_npd']+' NPD');
+    $('#ls_bappeda').html(data.ls['jumlah_ls']);
+    $('#npd_terlambat').html(data.keterlambatan['jumlah_npd']);
+    $('#bidang_terlambat').html(data.keterlambatan['jumlah_bidang']);
+
+    $('.sebaran_kas_disub_bidang').find('tr').remove();
+    $.each(data.sebaranKasDiBidang, function(i, field){
+        var row = '<tr>'
+                        +'<td width="15"><div style="width:10px;height:10px;border-radius:3px;"><li class="fa fa-circle text-danger"></li></div></td>'
+                        +'<td align="left">'+ field.nama_singkat +'</td>'
+                        +'<td align="right">'+ field.jumlah_total +'</td>'
+                        +'<td align="right">'+ field.jumlah_npd +' NPD</td>'
+                    +'</tr>';
+        $('.sebaran_kas_disub_bidang').append(row);
+    });
+}
+
+function infoUpdate(text)
+{
+	setTimeout(function(){
+		$('.info-last-update').html(text);
+		$('.info-last-update').slideDown("slow");
+	}, 2000);
 }

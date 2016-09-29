@@ -10,7 +10,7 @@ $(document).ready(function(){
     $('.sidebar-mobile-overlay').click(function() {
         $('#sidebar-mobile').removeClass('active');
     });
-	//refresh();
+
 	loadData();
 	Highcharts.setOptions({
 	    lang: {
@@ -42,17 +42,12 @@ $(document).ready(function(){
     });
 	
 });
-function errorAlert(){
+
+function errorAlert()
+{
     $('.error-alert').addClass('in');
 }
-function refresh()
-{
-	loadData();
 
-	setTimeout(function(){
-		refresh();
-	}, 30000);
-}
 function color(i)
 {
 	var warna;
@@ -654,10 +649,28 @@ function chartPieDana(data)
         }]
     });	
 }
-function loadData(loader)
+
+function loadData()
 {
-	//if(loader) $('.page-loading').fadeIn();
+	var data = JSON.parse(window.localStorage.getItem('dataDashboard'));
+
 	$('.card').addClass('loading');
+	if(data != null){
+		setValue(data);
+
+		setTimeout(function(){
+			$('.card').removeClass('loading');
+		    $('.error-alert').removeClass('in');
+	    }, 1000);
+	} else {
+		saveToLokalData();
+	}
+
+	/*infoUpdate(window.localStorage.getItem('lastUpdateDashboard'));*/
+}
+
+function saveToLokalData()
+{
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/dashboard',
         type: "post",
@@ -665,81 +678,95 @@ function loadData(loader)
 		async: true,
         dataType: "json",
         success: function(data) {
-        	$('.card').removeClass('loading');
-            $('.error-alert').removeClass('in');
-        	chartDeviasi(data.deviasi);
-        	chartPieDana(data.program_kegiatan);
-        	chartDeviasiFisik(data.deviasi_fisik);
-        	chartPieKegiatan(data.program_kegiatan);
-        	chartSebaranBidang(data.kegiatan_bidang);
-        	chartDeviasiKeuangan(data.deviasi_keuangan);
+			var currentdate = new Date(); 
+        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
 
-        	$('#title_apbd').html(data.target_apbd['title']);
-        	$('#jml_program_apbd').html(data.target_apbd['jml_program'] + ' <small>Program</small>');
-        	$('#jml_kegiatan_apbd').html(data.target_apbd['jml_kegiatan'] + ' <small>Kegiatan</small>');
-        	$('#jml_apbd').html(data.target_apbd['jml_apbd'] + ' M');
-        	$('.periode_1').html('s/d '+ data.total_deviasi['periode']);
-        	$('.periode').html(data.total_deviasi['periode']);
-        	$('#prosentase_deviasi').html(data.total_deviasi['prosentase']+'%');
-        	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+" <br> dari <br> Rp. "+data.total_deviasi['target']);
-        	$('#prosentase_efisiensi').html(data.total_efisiensi['prosentase']+'%');
-        	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+" <br> dari <br> Rp. "+data.total_efisiensi['target']);
-        	$('#nilai_blm_terlaksana').html('Rp. '+data.total_blm_terlaksana['nilai']);
-        	$('#prosentase_blm_terlaksana').html(data.total_blm_terlaksana['prosentase']+'%');
-        	$('#nilai_blm_spj').html('Rp. '+data.total_blm_spj['nilai']);
-        	$('#prosentase_blm_spj').html(data.total_blm_spj['prosentase']+'%');
-        	$('#target_bulan_ini').html('Target : Rp. '+data.target_serapan['target']);
-        	$('#serapan_bulan_ini').html('Serapan : Rp. '+data.target_serapan['serapan']);
-        	$('#sisa_serapan').html('Rp. '+data.target_serapan['sisa_dana']);
-        	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari');
-        	$('.circliful').find('span').remove();
-        	$('.circliful').find('canvas').remove();
-        	$('.circliful').attr('data-text', parseInt(data.target_serapan['prosentase'])+'%');
-        	$('.circliful').attr('data-part', parseInt(data.target_serapan['prosentase']));
-        	$('.circliful').attr('data-percent', parseInt(data.target_serapan['prosentase']));
-        	$('.circliful').circliful();
-
-        	$('#list_sebaran_bidang').find('tr').remove();
-        	$.each(data.program_kegiatan, function(i, field){
-        		var row = '<tr>'
-	                        +'<td width="15"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
-	                        +'<td>'+ field.nama_singkat +'</td>'
-	                        +'<td class="text-right">Rp. '+ field.jml_anggaran +'. '+ field.jml_program +' Program '+ field.jml_kegiatan +' Kegiatan</td>'
-	                    	+'</tr>';
-
-        		$('#list_sebaran_bidang').append(row);
-        	});
-
-        	$('#list_realisasi').parent().find('.media-0').remove();
-        	$('#list_realisasi').find('.media').remove();
-        	if(data.realisasi_terbaru){
-	        	$.each(data.realisasi_terbaru, function(i, field){
-	        		var row = '<div class="media">'
-	                                +'<div class="media-left"><div style="width:15px;height:15px;border-radius:50em;background:#509785;"></div></div>'
-	                                +'<div class="media-body text-left">'
-	                                    +'<div>'+ field.nama_kegiatan +'</div>'
-	                                    +'<div>Rp. '+ field.total_realisasi +'</div>'
-	                                    +'<div>'+ field.nama_sub_bidang +'</div>'
-	                                +'</div>'
-	                            +'</div>';
-
-	        		$('#list_realisasi').append(row);
-	        	});
-	        } else {
-	        	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:25px;">Tidak ada data realisasi</div>');
-	        }
-
-			//closeModal();
+        	window.localStorage.setItem('dataDashboard', JSON.stringify(data));
+        	window.localStorage.setItem('lastUpdateDashboard', datetime);
+        	loadData();
         },
         error: function (textStatus, errorThrown) {
-            errorAlert();
-			//alert('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server!');
-            /*setTimeout(function(){
-                loadData();
-            }, 5000);*/
-            //noticeFailed('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server.');
+        	if(window.localStorage.getItem('dataDashboard') != null){
+	        	loadData();
+			} else {
+        		errorAlert();
+			}
         }
     }).done(function() {
 
     });
+}
+	
+function setValue(data)
+{
+	chartDeviasi(data.deviasi);
+	chartPieDana(data.program_kegiatan);
+	chartDeviasiFisik(data.deviasi_fisik);
+	chartPieKegiatan(data.program_kegiatan);
+	chartSebaranBidang(data.kegiatan_bidang);
+	chartDeviasiKeuangan(data.deviasi_keuangan);
+
+	$('#title_apbd').html(data.target_apbd['title']);
+	$('#jml_program_apbd').html(data.target_apbd['jml_program'] + ' <small>Program</small>');
+	$('#jml_kegiatan_apbd').html(data.target_apbd['jml_kegiatan'] + ' <small>Kegiatan</small>');
+	$('#jml_apbd').html(data.target_apbd['jml_apbd'] + ' M');
+	$('.periode_1').html('s/d '+ data.total_deviasi['periode']);
+	$('.periode').html(data.total_deviasi['periode']);
+	$('#prosentase_deviasi').html(data.total_deviasi['prosentase']+'%');
+	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+" <br> dari <br> Rp. "+data.total_deviasi['target']);
+	$('#prosentase_efisiensi').html(data.total_efisiensi['prosentase']+'%');
+	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+" <br> dari <br> Rp. "+data.total_efisiensi['target']);
+	$('#nilai_blm_terlaksana').html('Rp. '+data.total_blm_terlaksana['nilai']);
+	$('#prosentase_blm_terlaksana').html(data.total_blm_terlaksana['prosentase']+'%');
+	$('#nilai_blm_spj').html('Rp. '+data.total_blm_spj['nilai']);
+	$('#prosentase_blm_spj').html(data.total_blm_spj['prosentase']+'%');
+	$('#target_bulan_ini').html('Target : Rp. '+data.target_serapan['target']);
+	$('#serapan_bulan_ini').html('Serapan : Rp. '+data.target_serapan['serapan']);
+	$('#sisa_serapan').html('Rp. '+data.target_serapan['sisa_dana']);
+	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari');
+	$('.circliful').find('span').remove();
+	$('.circliful').find('canvas').remove();
+	$('.circliful').attr('data-text', parseInt(data.target_serapan['prosentase'])+'%');
+	$('.circliful').attr('data-part', parseInt(data.target_serapan['prosentase']));
+	$('.circliful').attr('data-percent', parseInt(data.target_serapan['prosentase']));
+	$('.circliful').circliful();
+
+	$('#list_sebaran_bidang').find('tr').remove();
+	$.each(data.program_kegiatan, function(i, field){
+		var row = '<tr>'
+	                    +'<td width="15"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
+	                    +'<td>'+ field.nama_singkat +'</td>'
+	                    +'<td class="text-right">Rp. '+ field.jml_anggaran +'. '+ field.jml_program +' Program '+ field.jml_kegiatan +' Kegiatan</td>'
+	                	+'</tr>';
+
+		$('#list_sebaran_bidang').append(row);
+	});
+
+	$('#list_realisasi').parent().find('.media-0').remove();
+	$('#list_realisasi').find('.media').remove();
+	if(data.realisasi_terbaru){
+    	$.each(data.realisasi_terbaru, function(i, field){
+    		var row = '<div class="media">'
+                            +'<div class="media-left"><div style="width:15px;height:15px;border-radius:50em;background:#509785;"></div></div>'
+                            +'<div class="media-body text-left">'
+                                +'<div>'+ field.nama_kegiatan +'</div>'
+                                +'<div>Rp. '+ field.total_realisasi +'</div>'
+                                +'<div>'+ field.nama_sub_bidang +'</div>'
+                            +'</div>'
+                        +'</div>';
+
+    		$('#list_realisasi').append(row);
+    	});
+    } else {
+    	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:25px;">Tidak ada data realisasi</div>');
+    }
+}
+
+function infoUpdate(text)
+{
+	setTimeout(function(){
+		$('.info-last-update').html(text);
+		$('.info-last-update').slideDown("slow");
+	}, 2000);
 }
