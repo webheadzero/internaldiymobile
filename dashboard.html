@@ -39,9 +39,18 @@
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="plugins/highcharts/jquery.circliful.min.js"></script>
         <script type="text/javascript" src="plugins/highcharts/highcharts.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+        <script type="text/javascript" src="plugins/slick/slick.min.js"></script>
+
         <script type="text/javascript" src="js/app-dashboard.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            document.addEventListener("deviceready",function(){
+              StatusBar.backgroundColorByHexString("#c0392b");
+            },false);
+        </script>
         <title>SI Internal Bappeda DIY</title>
     </head>
     <body>
@@ -62,6 +71,15 @@
                 </div>
             </div>
         </div>
+        <div class="error-alert">
+            <div class="box">
+                <h4>Notice</h4>
+                <p>
+                    Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server!
+                </p>
+                <a href="#" class="btn" onclick="loadData();">Reload</a>
+            </div>
+        </div>
         <div class="app-dashboard">
             <div class="app-header">
                 <button type="button" class="btn btn-left" id="sidebar-toggler-button"><i class="md md-menu"></i></button>
@@ -79,16 +97,16 @@
                 </div>
                 <div style="padding:15px 10px;">
                     <div class="card" style="padding-top:15px;">
-                        <table style="width:100%">
-                            <tr>
-                                <td align="center">Sebaran Dana</td>
-                                <td align="center">Sebaran Kegiatan</td>
-                            </tr>
-                            <tr>
-                                <td width="50%"><div id="pie-dana" style="height:150px;"></div></td>
-                                <td width="50%"><div id="pie-kegiatan" style="height:150px;"></div></td>
-                            </tr>
-                        </table>
+                        <div id="sebaran-chart">
+                            <div class="item">
+                                <h4>Sebaran Dana</h4>
+                                <div id="pie-dana" style="height:150px;"></div>
+                            </div>
+                            <div class="item">
+                                <h4>Sebaran Kegiatan</h4>
+                                <div id="pie-kegiatan" style="height:150px;"></div>
+                            </div>
+                        </div>
                         <div style="padding:15px;">
                             <table style="width:100%;font-size:11px;" id="list_sebaran_bidang"></table>
                         </div>

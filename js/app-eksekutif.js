@@ -21,12 +21,29 @@ $(document).ready(function(){
             yDecimals: 2
         }
     });
+    $('#dashboard-logo').slick({
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight:false,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        dots:false,
+        arrows:true,
+        pauseOnHover:false,
+        swipe:true,
+        prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
+        nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
+    });
 
     $('.btn').click(function(){
         nativeclick.trigger();
     });
 	
 });
+function errorAlert(){
+    $('.error-alert').addClass('in');
+}
 function refresh()
 {
 	loadData();
@@ -381,6 +398,7 @@ function loadData()
         dataType: "json",
         success: function(data) {
             $('.card').removeClass('loading');
+            $('.error-alert').removeClass('in');
             chartTransaksiNpd(data.grafikSebaranNpdBuah);
             chartKasDiBidang(data.grafikKasDiBidang);
             chartTransaksi(data.grafikSebaranNpdRp);
@@ -414,11 +432,9 @@ function loadData()
                             +'</tr>';
                 $('.sebaran_kas_disub_bidang').append(row);
             });
-            closeModal();
         },
         error: function (textStatus, errorThrown) {
-            closeModal();
-            noticeFailed('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server.');
+            errorAlert();
         }
     }).done(function() {
 

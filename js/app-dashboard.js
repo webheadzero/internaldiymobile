@@ -22,12 +22,29 @@ $(document).ready(function(){
 	        yDecimals: 2,
 	    }
 	});
+    $('#sebaran-chart').slick({
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight:false,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        dots:false,
+        arrows:true,
+        pauseOnHover:false,
+        swipe:true,
+        prevArrow:'<button type="button" class="slick-arrow prev" style="color:#333;"><i class="md md-arrow_back"></i></button>',
+        nextArrow:'<button type="button" class="slick-arrow next" style="color:#333;"><i class="md md-arrow_forward"></i></button>',
+    });
 
     $('.btn').click(function(){
         nativeclick.trigger();
     });
 	
 });
+function errorAlert(){
+    $('.error-alert').addClass('in');
+}
 function refresh()
 {
 	loadData();
@@ -649,6 +666,7 @@ function loadData(loader)
         dataType: "json",
         success: function(data) {
         	$('.card').removeClass('loading');
+            $('.error-alert').removeClass('in');
         	chartDeviasi(data.deviasi);
         	chartPieDana(data.program_kegiatan);
         	chartDeviasiFisik(data.deviasi_fisik);
@@ -714,10 +732,11 @@ function loadData(loader)
 			//closeModal();
         },
         error: function (textStatus, errorThrown) {
-			alert('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server!');
-            setTimeout(function(){
+            errorAlert();
+			//alert('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server!');
+            /*setTimeout(function(){
                 loadData();
-            }, 5000);
+            }, 5000);*/
             //noticeFailed('Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server.');
         }
     }).done(function() {

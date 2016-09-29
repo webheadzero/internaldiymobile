@@ -3,7 +3,7 @@
 @import url("../plugins/font-awesome/css/font-awesome.min.css");
 body { font-family: 'HelveticaNeueLight', sans-serif; font-size: 16px; color: #333; }
 
-.font-ultralight { font-family: 'HelveticaNeueUltraLight', sans-serif; }
+.font-ultralight, .error-alert .box h4 { font-family: 'HelveticaNeueUltraLight', sans-serif; }
 
 .font-thin { font-family: 'HelveticaNeueThin', sans-serif; }
 
@@ -47,7 +47,7 @@ body { font-family: 'HelveticaNeueLight', sans-serif; font-size: 16px; color: #3
 .circliful { display: inline-block; position: relative; }
 .circliful .circle-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }
 
-#sidebar-mobile { position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 9999; visibility: hidden; }
+#sidebar-mobile { position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 9999; opacity: 0; z-index: -1; transition: all 300ms ease-out; -webkit-transition: all 300ms ease-out; }
 #sidebar-mobile .sidebar-mobile-overlay { position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.8); opacity: 0; transition: all 300ms ease-out; -webkit-transition: all 300ms ease-out; }
 #sidebar-mobile .sidebar-mobile-content { position: absolute; top: 0; left: 0; bottom: 0; right: 60px; background: #1C1E2A; transform: translate(-100%, 0); -webkit-transform: translate(-100%, 0); transition: all 300ms ease-out; -webkit-transition: all 300ms ease-out; }
 #sidebar-mobile .sidebar-mobile-content .sidebar-mobile-head { padding: 30px; text-align: center; color: #fff; background: rgba(0, 0, 0, 0.3); }
@@ -58,9 +58,23 @@ body { font-family: 'HelveticaNeueLight', sans-serif; font-size: 16px; color: #3
 #sidebar-mobile .sidebar-mobile-content .sidebar-mobile-menu li a { color: rgba(255, 255, 255, 0.7); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: block; padding: 0 30px; height: 60px; line-height: 60px; font-size: 15px; font-weight: medium; text-decoration: none !important; transition: all 300ms ease-out; position: relative; }
 #sidebar-mobile .sidebar-mobile-content .sidebar-mobile-menu li a .md { width: 60px; line-height: 60px; text-align: center; font-size: 1.2em; display: inline-block; background: rgba(0, 0, 0, 0.1); margin: 0 15px 0 -30px; padding: 0; }
 #sidebar-mobile .sidebar-mobile-content .sidebar-mobile-menu li a:active { background: rgba(255, 255, 255, 0.1); }
-#sidebar-mobile.active { visibility: visible; }
+#sidebar-mobile.active { opacity: 1; z-index: 9999; }
 #sidebar-mobile.active .sidebar-mobile-overlay { opacity: 1; }
 #sidebar-mobile.active .sidebar-mobile-content { transform: translate(0, 0); -webkit-transform: translate(0, 0); }
+
+.error-alert { position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: rgba(0, 0, 0, 0.7); z-index: -1; opacity: 0; transition: all 100ms ease-out; -webkit-transition: all 100ms ease-out; }
+.error-alert .box { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7); -webkit-transform: translate(-50%, -50%) scale(0.7); opacity: 0; background: #fff; border-radius: 2px; -webkit-border-radius: 2px; text-align: center; padding: 30px; min-width: 80%; transition: all 300ms ease-out; -webkit-transition: all 300ms ease-out; }
+.error-alert .box h4 { margin-bottom: 30px; letter-spacing: 1px; }
+.error-alert .box .btn { height: 50px; line-height: 50px; background: none; color: #3498db; margin: 30px -30px -30px; display: block; border: none; border-top: 1px solid #eee; width: auto; text-decoration: none !important; }
+.error-alert .box .btn:active { background: #eee; }
+.error-alert.in { opacity: 1; z-index: 99999; }
+.error-alert.in .box { transform: translate(-50%, -50%) scale(1); -webkit-transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+.slick-slider { position: relative; }
+.slick-slider .slick-slide { text-align: center; }
+.slick-slider .slick-arrow { position: absolute; top: 50%; transform: translate(0, -50%); -webkit-transform: translate(0, -50%); border: none; background: none; font-size: 1.5em; color: #fff; z-index: 999; outline: none; display: block; width: 50px; height: 50px; line-height: 50px; text-align: center; }
+.slick-slider .slick-arrow.prev { left: 15px; }
+.slick-slider .slick-arrow.next { right: 15px; }
 
 @keyframes slideUp { 0% { opacity: 0; transform: translate(0, 100px); }
   100% { opacity: 1; transform: translate(0, 0); } }

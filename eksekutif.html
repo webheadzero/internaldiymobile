@@ -39,9 +39,18 @@
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="plugins/highcharts/jquery.circliful.min.js"></script>
         <script type="text/javascript" src="plugins/highcharts/highcharts.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+        <script type="text/javascript" src="plugins/slick/slick.min.js"></script>
+
         <script type="text/javascript" src="js/app-eksekutif.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            document.addEventListener("deviceready",function(){
+              StatusBar.backgroundColorByHexString("#c0392b");
+            },false);
+        </script>
         <title>SI Internal Bappeda DIY</title>
     </head>
     <body>
@@ -62,6 +71,15 @@
                 </div>
             </div>
         </div>
+        <div class="error-alert">
+            <div class="box">
+                <h4>Notice</h4>
+                <p>
+                    Terjadi kesalahan, aplikasi tidak dapat mengambil data dari server!
+                </p>
+                <a href="#" class="btn" onclick="loadData();">Reload</a>
+            </div>
+        </div>
         <div class="app-dashboard">
             <div class="app-header">
                 <button type="button" class="btn btn-left" id="sidebar-toggler-button"><i class="md md-menu"></i></button>
@@ -70,13 +88,16 @@
             </div>
             <div class="app-content">
                 <div id="dashboard-logo" style="color:#fff;padding:15px 30px;">
-                    <div style="font-size:1em;margin-bottom:5px;">Pengajuan NPD</div>
-                    <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:2em;"></div>
-                    <div id="jml_pengajuan_npd" class="font-thin" style="font-size:1em;"></div>
-                    <br/>
-                    <div style="font-size:1em;margin-bottom:5px;">Realisasi NPD</div>
-                    <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:2em;"></div>
-                    <div id="jml_realisasi_npd" class="font-thin" style="font-size:1em;"></div>
+                    <div class="item">
+                        <div style="font-size:1em;margin-bottom:5px;">Pengajuan NPD</div>
+                        <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:2em;margin:10px 0;"></div>
+                        <div id="jml_pengajuan_npd" class="font-thin" style="font-size:1em;"></div>
+                    </div>
+                    <div class="item">
+                        <div style="font-size:1em;margin-bottom:5px;">Realisasi NPD</div>
+                        <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:2em;"></div>
+                        <div id="jml_realisasi_npd" class="font-thin" style="font-size:1em;"></div>
+                    </div>
                 </div>
                 <div style="padding:15px 10px;">
                     <div class="card">
