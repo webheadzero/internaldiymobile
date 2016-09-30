@@ -263,15 +263,15 @@ function chartTransaksi(data)
             }
         },
         series: [
-            {
-                name: 'Realisasi',
-                color:'#2ecc71',
-                data: realisasi
-            },
             { 
                 name: 'Pengajuan', 
                 color:'#3498db', 
                 data: pengajuan
+            },
+            {
+                name: 'Realisasi',
+                color:'#2ecc71',
+                data: realisasi
             },
         ]
     });
@@ -387,23 +387,18 @@ function loadData()
 {
 	var data = JSON.parse(window.localStorage.getItem('dataKeuangan'));
 
-	$('.card').addClass('loading');
 	if(data != null){
+		$('.card').addClass('loading');
 		setValue(data);
-
-		setTimeout(function(){
-			$('.card').removeClass('loading');
-		    $('.error-alert').removeClass('in');
-	    }, 1000);
 	}else{
 		saveToLokalData();
 	}
-
-	/*infoUpdate(window.localStorage.getItem('lastUpdateKeuangan'));*/
 }
 
 function saveToLokalData()
 {
+	$('.card').addClass('loading');
+	$('#info-last-update').parent().parent().slideUp('fast');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/eksekutif',
         type: "post",
@@ -417,7 +412,7 @@ function saveToLokalData()
 
         	window.localStorage.setItem('dataKeuangan', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateKeuangan', datetime);
-        	loadData();
+        	setValue(data);
         },
         error: function (textStatus, errorThrown) {
         	if(window.localStorage.getItem('dataKeuangan') != null){
@@ -466,12 +461,19 @@ function setValue(data)
                     +'</tr>';
         $('.sebaran_kas_disub_bidang').append(row);
     });
+
+	setTimeout(function(){
+		$('.card').removeClass('loading');
+	    $('.error-alert').removeClass('in');
+    }, 500);
+
+	infoUpdate(window.localStorage.getItem('lastUpdateKeuangan'));
 }
 
 function infoUpdate(text)
 {
 	setTimeout(function(){
-		$('.info-last-update').html(text);
-		$('.info-last-update').slideDown("slow");
-	}, 2000);
+		$('#info-last-update').html(text);
+		$('#info-last-update').parent().parent().slideDown("slow");
+	}, 1200);
 }

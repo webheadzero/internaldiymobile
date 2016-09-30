@@ -42,6 +42,7 @@ $(document).ready(function(){
     });
 	
 });
+
 function errorAlert()
 {
     $('.error-alert').addClass('in');
@@ -653,23 +654,18 @@ function loadData()
 {
 	var data = JSON.parse(window.localStorage.getItem('dataDashboard'));
 
-	$('.card').addClass('loading');
 	if(data != null){
+		$('.card').addClass('loading');
 		setValue(data);
-
-		setTimeout(function(){
-			$('.card').removeClass('loading');
-		    $('.error-alert').removeClass('in');
-	    }, 1000);
 	} else {
 		saveToLokalData();
 	}
-
-	/*infoUpdate(window.localStorage.getItem('lastUpdateDashboard'));*/
 }
 
 function saveToLokalData()
 {
+	$('.card').addClass('loading');
+	$('#info-last-update').parent().parent().slideUp('fast');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/dashboard',
         type: "post",
@@ -678,12 +674,12 @@ function saveToLokalData()
         dataType: "json",
         success: function(data) {
 			var currentdate = new Date(); 
-        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
-							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
+        	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
         	window.localStorage.setItem('dataDashboard', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateDashboard', datetime);
-        	loadData();
+        	setValue(data);
         },
         error: function (textStatus, errorThrown) {
         	if(window.localStorage.getItem('dataDashboard') != null){
@@ -713,9 +709,9 @@ function setValue(data)
 	$('.periode_1').html('s/d '+ data.total_deviasi['periode']);
 	$('.periode').html(data.total_deviasi['periode']);
 	$('#prosentase_deviasi').html(data.total_deviasi['prosentase']+'%');
-	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+" <br> dari <br> Rp. "+data.total_deviasi['target']);
+	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+"<br> dari<br> Rp. "+data.total_deviasi['target']);
 	$('#prosentase_efisiensi').html(data.total_efisiensi['prosentase']+'%');
-	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+" <br> dari <br> Rp. "+data.total_efisiensi['target']);
+	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+"<br> dari<br> Rp. "+data.total_efisiensi['target']);
 	$('#nilai_blm_terlaksana').html('Rp. '+data.total_blm_terlaksana['nilai']);
 	$('#prosentase_blm_terlaksana').html(data.total_blm_terlaksana['prosentase']+'%');
 	$('#nilai_blm_spj').html('Rp. '+data.total_blm_spj['nilai']);
@@ -723,7 +719,7 @@ function setValue(data)
 	$('#target_bulan_ini').html('Target : Rp. '+data.target_serapan['target']);
 	$('#serapan_bulan_ini').html('Serapan : Rp. '+data.target_serapan['serapan']);
 	$('#sisa_serapan').html('Rp. '+data.target_serapan['sisa_dana']);
-	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari');
+	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari  <sup>'+data.target_serapan['sisa_jam']+' <sup>Jam</sup></sup>  <sup>'+data.target_serapan['sisa_menit']+' <sup>Menit</sup></sup>');
 	$('.circliful').find('span').remove();
 	$('.circliful').find('canvas').remove();
 	$('.circliful').attr('data-text', parseInt(data.target_serapan['prosentase'])+'%');
@@ -747,8 +743,8 @@ function setValue(data)
 	if(data.realisasi_terbaru){
     	$.each(data.realisasi_terbaru, function(i, field){
     		var row = '<div class="media">'
-                            +'<div class="media-left"><div style="width:15px;height:15px;border-radius:50em;background:#509785;"></div></div>'
-                            +'<div class="media-body text-left">'
+                            +'<div class="media-left"><div style="margin-top:3px;width:12px;height:13px;border-radius:50em;background:#509785;float:left"></div></div>'
+                            +'<div class="media-body text-left" style="margin:-1px 0px 13px 20px;">'
                                 +'<div>'+ field.nama_kegiatan +'</div>'
                                 +'<div>Rp. '+ field.total_realisasi +'</div>'
                                 +'<div>'+ field.nama_sub_bidang +'</div>'
@@ -758,14 +754,21 @@ function setValue(data)
     		$('#list_realisasi').append(row);
     	});
     } else {
-    	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:25px;">Tidak ada data realisasi</div>');
+    	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:0px;">Tidak ada data realisasi</div>');
     }
+
+    setTimeout(function(){
+		$('.card').removeClass('loading');
+	    $('.error-alert').removeClass('in');
+    }, 500);
+
+	infoUpdate(window.localStorage.getItem('lastUpdateDashboard'));
 }
 
 function infoUpdate(text)
 {
 	setTimeout(function(){
-		$('.info-last-update').html(text);
-		$('.info-last-update').slideDown("slow");
-	}, 2000);
+		$('#info-last-update').html(text);
+		$('#info-last-update').parent().parent().slideDown("slow");
+	}, 1200);
 }
