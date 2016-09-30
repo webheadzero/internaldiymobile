@@ -412,8 +412,8 @@ function saveToLokalData()
         dataType: "json",
         success: function(data) {
 			var currentdate = new Date(); 
-        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
-							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
+        	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                	 +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
         	window.localStorage.setItem('dataKeuangan', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateKeuangan', datetime);
@@ -426,8 +426,6 @@ function saveToLokalData()
         		errorAlert();
 			}
         }
-    }).done(function() {
-
     });
 }
 	

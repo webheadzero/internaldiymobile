@@ -681,7 +681,7 @@ function saveToLokalData()
         success: function(data) {
 			var currentdate = new Date(); 
         	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
-							                +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
+							                	 +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
         	window.localStorage.setItem('dataDashboard', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateDashboard', datetime);
@@ -694,8 +694,6 @@ function saveToLokalData()
         		errorAlert();
 			}
         }
-    }).done(function() {
-
     });
 }
 	
@@ -736,9 +734,11 @@ function setValue(data)
 	$('#list_sebaran_bidang').find('tr').remove();
 	$.each(data.program_kegiatan, function(i, field){
 		var row = '<tr>'
-	                    +'<td width="15"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
-	                    +'<td>'+ field.nama_singkat +'</td>'
-	                    +'<td class="text-right">Rp. '+ field.jml_anggaran +'. '+ field.jml_program +' Program '+ field.jml_kegiatan +' Kegiatan</td>'
+	                    +'<td width="5%"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
+	                    +'<td width="30%">'+ field.nama_singkat +'</td>'
+	                    +'<td width="20%" align="right">Rp. '+ field.jml_anggaran +'. </td>'
+	                    +'<td width="22%" align="right">'+ field.jml_program +' Program </td>'
+	                    +'<td width="23%" align="right">'+ field.jml_kegiatan +' Kegiatan </td>'
 	                	+'</tr>';
 
 		$('#list_sebaran_bidang').append(row);
