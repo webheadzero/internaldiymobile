@@ -73,38 +73,35 @@
                 <li class="active"><a href="eksekutif.html" class="btn"><i class="md md-dvr"></i> Eksekutif Keuangan</a></li>
             </ul>
             <div class="app-content">
-            	<div style="padding:15px 10px 0px 10px;">
-                	<div style="padding:5px;display:none;border-radius:3px;color:#fff;background:#3498db;font-weight:900;">
-                        <div class="card-body" style="font-size:9pt;text-align:center;">
-                        	<div id="info-last-update"> </div>
-                        </div>
-                    </div> 
+            	<div id="updatebox">
+                    <div id="info-last-update">Last data update :</div>
+                    <button type="button" class="btn btn-right" onclick="saveToLokalData();"><i class="md md-refresh"></i>
                 </div>
                 <div id="dashboard-logo" style="color:#fff;padding:50px 30px;">
                     <div class="item">
                         <div style="font-size:1em;margin-bottom:5px;">Pengajuan NPD</div>
-                        <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:2em;margin:10px 0;">Rp. -</div>
+                        <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:1em;margin:10px 0;">Rp. -</div>
                         <div id="jml_pengajuan_npd" class="font-thin" style="font-size:1em;">0 NPD</div>
                     </div>
                     <div class="item">
                         <div style="font-size:1em;margin-bottom:5px;">Realisasi NPD</div>
-                        <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:2em;">Rp. -</div>
+                        <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:1em;margin:10px 0;">Rp. -</div>
                         <div id="jml_realisasi_npd" class="font-thin" style="font-size:1em;">0 NPD</div>
                     </div>
                 </div>
                 <div style="padding:15px 10px;">
                     <div class="card">
-                        <div class="card-heading">KAS BAPPEDA DIY</div>
-                        <div class="card-body">
+                        <div class="card-heading">Kas Bappeda Diy</div>
+                        <div class="card-body text-center">
                             <div id="sisa_kas_bappeda" style="font-size:1.4em"></div>
                             <br/>
                             <div>Dana yang masih di bendahara</div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-heading">KAS DI SUB BIDANG</div>
+                        <div class="card-heading">Kas Di Sub Bidang</div>
                         <div class="card-body">
-                            <div id="kas_disub_bidang" style="font-size:1.4em"></div>
+                            <div id="kas_disub_bidang" style="font-size:1.4em;text-align: center;"></div>
                             <br/>
                             <div style="text-align:center;overflow: hidden;">
                                 <div style="float:left;" id="kas_up_disub_bidang"> UP = Rp. 0,00 </div>
@@ -116,18 +113,19 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-heading">KAS YANG BELUM MENERIMA GU</div>
-                        <div class="card-body">
-                            <div id="kas_belum_gu" style="font-size:1.4em"></div>
+                        <div class="card-heading">Kas Yang Belum Menerima GU</div>
+                        <div class="card-body text-center">
+                            <div id="kas_belum_gu" style="font-size:1.2em;"></div>
                             <div id="persen_belum_gu" style="font-size:3em;margin:10px 0;"></div>
-                            <div id="npd_belum_gu" style="text-align: right;"></div>
+                            <div id="npd_belum_gu"></div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-heading">LS BAPPEDA</div>
-                        <div class="card-body">
-                            <div id="ls_bappeda" style="font-size:1.4em"></div>
-                            <div id="npd_ls_bappeda" style="text-align: right;"></div>
+                        <div class="card-heading">LS Bappeda</div>
+                        <div class="card-body text-center">
+                            <div id="ls_bappeda" style="font-size:1.2em"></div>
+                            <br/>
+                            <div id="npd_ls_bappeda"></div>
                         </div>
                     </div>
                     <div class="card">
@@ -138,9 +136,9 @@
                         </div>
                     </div>                    
                     <div class="card">
-                        <div class="card-heading">KETERLAMBATAN LAPORAN REALISASI</div>
+                        <div class="card-heading">Keterlambatan Laporan Realisasi</div>
                         <div class="card-body" style="overflow: hidden;">
-                            <div style="float: left;height:100px;text-align: center;width: 50%;border-right: 1px solid #eee;padding:30px 0 0;">
+                            <div style="float: left;height:100px;text-align: center;width: 50%;border-right: 1px solid rgba(255,255,255,0.1);padding:30px 0 0;">
                                 <div id="npd_terlambat" style="font-size:3em;"></div>
                                 <div>NPD</div>
                             </div>

@@ -3,7 +3,7 @@
 @import url("../plugins/font-awesome/css/font-awesome.min.css");
 
 body{
-	font-family: 'HelveticaNeueLight', sans-serif; font-size: 16px; color: #333;
+	font-family: 'HelveticaNeueLight', sans-serif; font-size: 14px; color: #333;
 	background:#0E0F19;
 }
 .font-ultralight{
@@ -20,6 +20,15 @@ body{
 }
 .text-danger{
 	color:#c0392b;
+}
+.text-right{
+	text-align:right;
+}
+.text-center{
+	text-align:center;
+}
+.btn{
+	outline:none;
 }
 .app-start{
 	position:fixed;
@@ -52,6 +61,7 @@ body{
 		-webkit-transform:translate(-50%,-50%);
 		color:#fff;
 		letter-spacing: 1.5px;
+		text-align: center;
 		h1,h3,h4{
 			@extend .font-ultralight;
 		}
@@ -100,7 +110,7 @@ body{
 .app-header{
 	height:50px;
 	line-height:50px;
-	background:#0E0F19;
+	background:#202333;
 	color:#fff;
 	position:fixed;
 	top:0;left:0;right:0;
@@ -146,19 +156,24 @@ body{
 	margin:0;
 	padding:0;
 	list-style:none;
-	background:rgba(0,0,0,0.5);
+	background:#202333;
 	li{
 		float: left;
 		width: 50%;
 		a{
 			text-align: center;
-			height:40px;
-			line-height:40px;
 			display: block;
 			color:rgba(255,255,255,0.8);
 			text-decoration: none!important;
 			font-size:0.9em;
 			letter-spacing: 0;
+			height: 70px;
+			padding-top:10px;
+			.md{
+				display: block;
+				font-size:25px;
+				margin-bottom: 5px;
+			}
 		}
 		&.active{
 			a{
@@ -169,7 +184,7 @@ body{
 }
 .app-content{
 	position:fixed;
-	top:90px;
+	top:120px;
 	left:0;
 	bottom:0;
 	right:0;
@@ -182,8 +197,32 @@ body{
 	bottom:0;
 	right:0;
 }
+#updatebox{
+	background:#202333;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	color:#fff;
+	padding:15px;
+	margin:15px 15px 0;
+	position:relative;
+	overflow:hidden;
+	font-size:12px;
+	.btn{
+		position:absolute;
+		top:5px;
+		right:5px;
+		bottom:5px;
+		width: 30px;
+		font-size:20px;
+		background:#0B78E3;
+		border:none;
+		color:#fff;
+		border-radius:2px;
+		-webkit-border-radius:2px;
+	}
+}
 .card{
-	background:#151722;
+	background:#202333;
 	border-radius:2px;
 	-webkit-border-radius:2px;
 	margin-bottom:15px;
@@ -193,6 +232,9 @@ body{
 	color:#fff;
 	.card-heading{
 		padding:10px 15px;
+		background: rgba(255,255,255,0.1);
+		margin-bottom: 15px;
+		font-size:12px;
 	}
 	.card-body{
 		padding:15px;
@@ -251,6 +293,15 @@ body{
 	.highcharts-series{
 		rect{
 			stroke-width:0!important;
+		}
+	}
+	.highcharts-tooltip{
+		path{
+			fill:#000;
+			stroke-width:0;
+		}
+		span{
+			color:#fff!important;
 		}
 	}
 }
