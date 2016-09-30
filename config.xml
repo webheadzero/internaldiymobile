@@ -13,6 +13,8 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2"/>
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0"/>
     <preference name="orientation" value="portrait" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#202333" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

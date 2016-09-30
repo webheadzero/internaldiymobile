@@ -33,7 +33,7 @@ $(document).ready(function()
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight:false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
@@ -671,7 +671,6 @@ function loadData()
 function saveToLokalData()
 {
 	$('.card').addClass('loading');
-	$('#info-last-update').parent().parent().slideUp('fast');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/dashboard',
         type: "post",
@@ -775,6 +774,5 @@ function infoUpdate(text)
 {
 	setTimeout(function(){
 		$('#info-last-update').html(text);
-		$('#info-last-update').parent().parent().slideDown("slow");
 	}, 1200);
 }

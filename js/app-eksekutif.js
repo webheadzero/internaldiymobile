@@ -403,7 +403,6 @@ function loadData()
 function saveToLokalData()
 {
 	$('.card').addClass('loading');
-	$('#info-last-update').parent().parent().slideUp('fast');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/eksekutif',
         type: "post",
@@ -477,6 +476,5 @@ function infoUpdate(text)
 {
 	setTimeout(function(){
 		$('#info-last-update').html(text);
-		$('#info-last-update').parent().parent().slideDown("slow");
 	}, 1200);
 }

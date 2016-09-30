@@ -83,19 +83,15 @@
         <div class="app-dashboard">
             <div class="app-header">
                 <div class="app-title">Dashboard Internal</div>
-                <button type="button" class="btn btn-right" onclick="saveToLokalData();"><i class="md md-refresh"></i></button>
             </div>
             <ul class="app-nav">
                 <li class="active"><a href="dashboard.html" class="btn"><i class="md md-equalizer"></i> Dashboard Internal</a></li>
                 <li><a href="eksekutif.html" class="btn"><i class="md md-dvr"></i> Eksekutif Keuangan</a></li>
             </ul>
             <div class="app-content">
-            	<div style="padding:15px 10px 0px 10px;">
-                	<div style="padding:5px;display:none;border-radius:3px;color:#fff;background:#3498db;font-weight:900;">
-                        <div class="card-body" style="font-size:9pt;text-align:center;">
-                        	<div id="info-last-update"> </div>
-                        </div>
-                    </div> 
+                <div id="updatebox">
+                    <div id="info-last-update">Last data update :</div>
+                    <button type="button" class="btn btn-right" onclick="saveToLokalData();"><i class="md md-refresh"></i>
                 </div>
                 <div id="dashboard-logo" style="color:#fff;padding:50px 30px;text-align: center;">
                     <div id="title_apbd" style="font-size:1.2em;margin-bottom:5px;">APBD 2016</div>
@@ -191,13 +187,13 @@
                     <div class="card">
                         <div class="card-heading">Sisa Dana Belum Terserap</div>
                         <div class="card-body">
-                            <div id="sisa_serapan" style="font-size:2em;"></div>
+                            <div id="sisa_serapan" style="font-size:2em;text-align: center;"></div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-heading">Sisa waktu yang tersedia</div>
                         <div class="card-body">
-                            <div id="sisa_waktu" style="font-size:2em;"></div>
+                            <div id="sisa_waktu" style="font-size:2em;text-align: center;"></div>
                         </div>
                     </div>
                     <div class="card">
