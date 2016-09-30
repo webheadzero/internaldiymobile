@@ -33,7 +33,7 @@ $(document).ready(function()
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight:false,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
