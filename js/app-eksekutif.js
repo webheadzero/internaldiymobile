@@ -12,7 +12,12 @@ $(document).ready(function()
         $('#sidebar-mobile').removeClass('active');
     });
 
-	loadData();
+	if(navigator.onLine){
+		saveToLokalData();
+	}else{
+		loadData();
+	}
+
 	Highcharts.setOptions({
         lang: {
             decimalPoint: ',',
