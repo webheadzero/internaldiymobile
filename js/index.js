@@ -15,7 +15,7 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- */
+ 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,7 +38,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
+//        var listeningElement = parentElement.querySelector('.listening');
+		app.receivedEvent('deviceready');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
@@ -49,3 +50,12 @@ var app = {
 };
 
 app.initialize();
+*/
+
+function exitApp(event){
+	if(event == true){
+		navigator.app.exitApp();
+	} else {
+		$('.error-alert').removeClass('in');
+	}
+}
