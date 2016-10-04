@@ -36,7 +36,7 @@ $(document).ready(function()
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
-        pauseOnHover:false,
+        pauseOnHover:true,
         swipe:true,
         prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
         nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
@@ -329,9 +329,9 @@ function chartKasDiBidang(data)
                     fontWeight:'bold',
                     fontSize:'11'
                 },
-                rotation:-30,
-                x:0,
-                y:13
+                rotation:-55,
+                x:12,
+                y:10
             },
             gridLineWidth:0,
             lineWidth:2,
@@ -476,5 +476,5 @@ function infoUpdate(text)
 {
 	setTimeout(function(){
 		$('#info-last-update').html(text);
-	}, 1200);
+	}, 900);
 }

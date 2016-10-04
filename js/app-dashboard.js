@@ -37,7 +37,7 @@ $(document).ready(function()
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
-        pauseOnHover:false,
+        pauseOnHover:true,
         swipe:true,
         prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
         nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
@@ -46,7 +46,7 @@ $(document).ready(function()
     $('.btn').click(function(){
         nativeclick.trigger();
     });
-	
+
 });
 
 function errorAlert()
@@ -678,7 +678,7 @@ function saveToLokalData()
 		async: true,
         dataType: "json",
         success: function(data) {
-			var currentdate = new Date(); 
+			var currentdate = new Date();
         	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
 							                	 +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
@@ -695,7 +695,7 @@ function saveToLokalData()
         }
     });
 }
-	
+
 function setValue(data)
 {
 	chartDeviasi(data.deviasi);
@@ -735,7 +735,7 @@ function setValue(data)
 		var row = '<tr>'
 	                    +'<td width="5%"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
 	                    +'<td width="30%">'+ field.nama_singkat +'</td>'
-	                    +'<td width="20%" align="right">Rp. '+ field.jml_anggaran +'. </td>'
+	                    +'<td width="20%" align="right">Rp. '+ field.jml_anggaran +' </td>'
 	                    +'<td width="22%" align="right">'+ field.jml_program +' Program </td>'
 	                    +'<td width="23%" align="right">'+ field.jml_kegiatan +' Kegiatan </td>'
 	                	+'</tr>';
@@ -774,5 +774,5 @@ function infoUpdate(text)
 {
 	setTimeout(function(){
 		$('#info-last-update').html(text);
-	}, 1200);
+	}, 900);
 }

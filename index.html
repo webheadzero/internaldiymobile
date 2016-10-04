@@ -37,30 +37,38 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/Toast.js"></script>
         <script type="text/javascript">
+
             document.addEventListener("deviceready",function(){
-				document.addEventListener('backbutton', function(event){
-					event.preventDefault();
-					$('.error-alert').addClass('in');
-				});
+				document.addEventListener("backbutton", onBackKeyDown, false);
             },false);
+
+            var lastTimeBackPress=0;
+			var durationToExit=2000;
+
+			function onBackKeyDown(e){
+			    e.preventDefault();
+			    e.stopPropagation();
+			    if(new Date().getTime() - lastTimeBackPress < durationToExit){
+			        navigator.app.exitApp();
+			    }else{
+			        window.plugins.toast.showWithOptions(
+			            {
+			              message: "Tekan sekali lagi untuk keluar.",
+			              duration: "short",
+			              position: "bottom",
+			              addPixelsY: -40
+			            }
+			          );
+			        lastTimeBackPress=new Date().getTime();
+			    }
+			};
+
         </script>
         <title>SI Internal Bappeda DIY</title>
     </head>
     <body style="background:#0E0F19;">
-
-    	<div class="error-alert">
-            <div class="box">
-                <h4>Confirmation</h4>
-                <p>
-                    Apakah anda yakin ingin keluar!
-                </p>
-                <a href="#" class="btn" onclick="exitApp(true)">Ya</a>
-                <a href="#" class="btn" onclick="exitApp(false)">Batal</a>
-            </div>
-        </div>
-
         <div class="app-start">
             <div class="intro-text">
                 <img src="img/logo-diy.png" height="100">
@@ -76,9 +84,6 @@
 
         <script type="text/javascript">
             $(function(){
-                /*setTimeout(function(){
-                    $('.app-start').addClass('in');
-                }, 300);*/
 
                 $('.button-start').click(function(){
                     $('.app-start').addClass('out').delay(500).fadeIn(function(){
@@ -86,9 +91,11 @@
                     });
                     return false;
                 });
-                 $('.btn').click(function(){
-                        nativeclick.trigger();
-                });
+
+				$('.btn').click(function(){
+					nativeclick.trigger();
+				});
+
             });
         </script>
     </body>
