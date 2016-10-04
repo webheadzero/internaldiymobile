@@ -44,6 +44,7 @@
         <script type="text/javascript" src="plugins/slick/slick.min.js"></script>
 
         <script type="text/javascript" src="js/app-eksekutif.js"></script>
+        <script type="text/javascript" src="js/swipe.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript">
             document.addEventListener("deviceready",function(){
@@ -53,7 +54,21 @@
 					window.location.href = "index.html";
 				});
             },false);
+
+			$(function() {      
+				$(".app-content").swipe({
+					swipeRight:function(event, direction, distance, duration, fingerCount) 
+					{
+						if(event.isTrusted == true) location.href='dashboard.html';
+						return false;
+					},
+					threshold:90,
+					excludedElements:$.fn.swipe.defaults.excludedElements+", #dashboard-logo"
+				});
+		    });
+
         </script>
+
         <title>SI Internal Bappeda DIY</title>
     </head>
     <body>

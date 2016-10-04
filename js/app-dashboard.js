@@ -46,7 +46,7 @@ $(document).ready(function()
     $('.btn').click(function(){
         nativeclick.trigger();
     });
-
+	
 });
 
 function errorAlert()
@@ -695,7 +695,7 @@ function saveToLokalData()
         }
     });
 }
-
+	
 function setValue(data)
 {
 	chartDeviasi(data.deviasi);

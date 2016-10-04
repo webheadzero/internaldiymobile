@@ -329,8 +329,8 @@ function chartKasDiBidang(data)
                     fontWeight:'bold',
                     fontSize:'11'
                 },
-                rotation:-55,
-                x:12,
+                rotation:-65,
+                x:0,
                 y:10
             },
             gridLineWidth:0,
