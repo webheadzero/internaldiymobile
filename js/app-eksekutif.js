@@ -25,7 +25,7 @@ $(document).ready(function()
         dots:false,
         arrows:true,
         pauseOnHover:true,
-        swipe:true,
+        swipe:false,
         prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
         nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
     });
