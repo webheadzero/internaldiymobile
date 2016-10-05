@@ -37,33 +37,65 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/Toast.js"></script>
+        <script type="text/javascript">
+
+            document.addEventListener("deviceready",function(){
+				document.addEventListener("backbutton", onBackKeyDown, false);
+            },false);
+
+            var lastTimeBackPress=0;
+			var durationToExit=2000;
+
+			function onBackKeyDown(e){
+			    e.preventDefault();
+			    e.stopPropagation();
+			    if(new Date().getTime() - lastTimeBackPress < durationToExit){
+			        navigator.app.exitApp();
+			    }else{
+			        window.plugins.toast.showWithOptions(
+			            {
+			              message: "Tekan sekali lagi untuk keluar.",
+			              duration: "short",
+			              position: "bottom",
+			              addPixelsY: -40
+			            }
+			          );
+			        lastTimeBackPress=new Date().getTime();
+			    }
+			};
+
+        </script>
         <title>SI Internal Bappeda DIY</title>
     </head>
-    <body>
+    <body style="background:#0E0F19;">
         <div class="app-start">
-            <img src="img/desktop.svg" id="desktop-icon" alt="">
-            <img src="img/gear.svg" id="gear-icon" alt="">
-            <img src="img/gear.svg" id="gear2-icon" alt="">
-            <h4>SI INTERNAL BAPPEDA</h4>
-            <a href="dashboard.html" class="button-start btn">Masuk</a>
+            <div class="intro-text">
+                <img src="img/logo-diy.png" height="100">
+                <br/><br/>
+                <h1>Selamat Datang</h1>
+                <h3>Aplikasi Internal</h3>
+                <h4>Bappeda Daerah Istimewa Yogyakarta</h4>
+                <br/><br/>
+                <img src="img/jmc.png" height="20">
+            </div>
+            <a href="main.html" class="button-start btn">Masuk</a>
         </div>
 
         <script type="text/javascript">
             $(function(){
-                setTimeout(function(){
-                    $('.app-start').addClass('in');
-                }, 300);
 
                 $('.button-start').click(function(){
                     $('.app-start').addClass('out').delay(500).fadeIn(function(){
-                        location.href="dashboard.html"
+                        location.href="main.html"
                     });
                     return false;
                 });
-                 $('.btn').click(function(){
-                        nativeclick.trigger();
-                });
+
+				$('.btn').click(function(){
+					nativeclick.trigger();
+				});
+
             });
         </script>
     </body>

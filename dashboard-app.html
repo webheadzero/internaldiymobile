@@ -1,0 +1,126 @@
+<script type="text/javascript" src="js/app-dashboard.js"></script>
+<div class="app-dashboard">
+    <!-- <div class="app-header">
+        <div class="app-title">Dashboard Internal</div>
+    </div>
+    <ul class="app-nav">
+        <li class="active"><a href="dashboard.html" class="btn"><i class="md md-equalizer"></i> Dashboard</a></li>
+        <li><a href="eksekutif.html" class="btn"><i class="md md-dvr"></i> Eksekutif</a></li>
+    </ul> -->
+    <div class="app-content">
+        <div id="updatebox">
+            <div id="info-last-update">Last data update :</div>
+            <button type="button" class="btn btn-right" onclick="saveToLokalData();"><i class="md md-refresh"></i></button>
+        </div>
+        <div id="dashboard-logo" style="color:#fff;padding:50px 30px;text-align: center;">
+            <div id="title_apbd" style="font-size:1.2em;margin-bottom:5px;">APBD 2016</div>
+            <div id="jml_apbd" class="font-thin" style="font-size:3em;color:#0A82F6;margin:15px 0;">0 M</div>
+            <div>
+                <span id="jml_program_apbd" style="margin-right: 10px;">0 <small>Program</small></span>
+                <span id="jml_kegiatan_apbd">0 <small>Kegiatan</small></span>
+            </div>
+        </div>
+        <div style="padding:15px 10px;">                 
+            <div class="card" style="padding-top:15px;">
+                <div id="sebaran-chart">
+                    <div class="item">
+                        <h4>Sebaran Dana</h4>
+                        <div id="pie-dana" style="height:150px;"></div>
+                    </div>
+                    <div class="item">
+                        <h4>Sebaran Kegiatan</h4>
+                        <div id="pie-kegiatan" style="height:150px;"></div>
+                    </div>
+                </div>
+                <div style="padding:15px;">
+                    <table style="width:100%;font-size:11px;" id="list_sebaran_bidang"></table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Sebaran Kegiatan per Bidang</div>
+                <div id="chart-subbidang" style="height:195px;"></div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Deviasi Serapan Anggaran</div>
+                <div id="chart-deviasi" style="height:300px;"></div>
+            </div>
+            <div class="card" style="background: #3498db;color:#fff;">
+                <div class="card-heading" style="border:none;background:rgba(0,0,0,0.1);">Total Deviasi <span class="periode_1"></span></div>
+                <div class="card-body" style="overflow:hidden">
+                    <div id="prosentase_deviasi" class="font-thin" style="font-size:4em; width: 50%;float: left;"></div>
+                    <div id="nilai_deviasi" style="float: right;width: 50%;text-align:right;margin-top:10px;"></div>
+                </div>
+            </div>
+            <div class="card" style="background: #f39c12;color:#fff;">
+                <div class="card-heading" style="border:none;background:rgba(0,0,0,0.1);">Total EFISIENSI <span class="periode_1"></span></div>
+                <div class="card-body" style="overflow:hidden">
+                    <div id="prosentase_efisiensi" class="font-thin" style="font-size:4em; width: 50%;float: left;"></div>
+                    <div id="nilai_efisiensi" style="float: right;width: 50%;text-align:right;margin-top:10px;"></div>
+                </div>
+            </div>
+            <div class="card" style="background: #e74c3c;color:#fff;">
+                <div class="card-heading" style="border:none;background:rgba(0,0,0,0.1);">Belum Terlaksana</div>
+                <div class="card-body" style="overflow:hidden">
+                    <div id="prosentase_blm_terlaksana" class="font-thin" style="font-size:4em; width: 50%;float: left;"></div>
+                    <div id="nilai_blm_terlaksana" style="float: right;width: 50%;text-align:right;margin-top:30px;"></div>
+                </div>
+            </div>
+            <div class="card" style="background: #e74c3c;color:#fff;">
+                <div class="card-heading" style="border:none;background:rgba(0,0,0,0.1);">Belum SPJ</div>
+                <div class="card-body" style="overflow:hidden">
+                    <div id="prosentase_blm_spj" class="font-thin" style="font-size:4em; width: 50%;float: left;"></div>
+                    <div id="nilai_blm_spj" style="float: right;width: 50%;text-align:right;margin-top:30px;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Deviasi Keuangan</div>
+                <div class="card-body">
+                    <div>Jumlah Kegiatan per Bidang <strong class="periode"></strong></div>
+                    <br/>
+                    <div id="chart-deviasi-keuangan" style="height:170px;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Deviasi Fisik</div>
+                <div class="card-body">
+                    <div>Jumlah Kegiatan per Bidang <strong class="periode"></strong></div>
+                    <br/>
+                    <div id="chart-deviasi-fisik" style="height:170px;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">TARGET SERAPAN <strong class="periode"></strong></div>
+                <div class="card-body">
+                    <div style="overflow:hidden">
+                        <div style="float: left;width:40%">
+                            <div class="circliful" data-dimension="120" data-text="0%" data-width="20" data-fontsize="25" data-percent="0" data-fgcolor="#509785" data-bgcolor="#74C3AD" data-total="100" data-part="0" style="width: 120px;">
+                                </div>
+                        </div>
+                        <div style="float: left;width:60%;padding: 30px 0 0 30px;">
+                            <div id="target_bulan_ini"></div>
+                            <div id="serapan_bulan_ini"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Sisa Dana Belum Terserap</div>
+                <div class="card-body">
+                    <div id="sisa_serapan" style="font-size:2em;text-align: center;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Sisa waktu yang tersedia</div>
+                <div class="card-body">
+                    <div id="sisa_waktu" style="font-size:2em;text-align: center;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">5 REALISASI TERBARU</div>
+                <div class="card-body">
+                    <div id="list_realisasi" style="font-size:10pt;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

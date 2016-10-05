@@ -1,17 +1,13 @@
-$(document).ready(function(){
-    $('#sidebar-toggler-button').click(function(){
-        if($('#sidebar-mobile').hasClass('active')){
-            $('#sidebar-mobile').removeClass('active');
-        } else {
-            $('#sidebar-mobile').addClass('active');
-        }
-        return false;
-    });
-    $('.sidebar-mobile-overlay').click(function() {
-        $('#sidebar-mobile').removeClass('active');
-    });
+$(document).ready(function()
+{
+   
 
-	loadData();
+	if(navigator.onLine){
+		saveToLokalDataDashboard();
+	}else{
+		loadDataDashboard();
+	}
+
 	Highcharts.setOptions({
 	    lang: {
 	        decimalPoint: ',',
@@ -23,7 +19,7 @@ $(document).ready(function(){
 	    }
 	});
     $('#sebaran-chart').slick({
-        infinite: false,
+        infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight:false,
@@ -31,16 +27,12 @@ $(document).ready(function(){
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
-        pauseOnHover:false,
+        pauseOnHover:true,
         swipe:true,
-        prevArrow:'<button type="button" class="slick-arrow prev" style="color:#333;"><i class="md md-arrow_back"></i></button>',
-        nextArrow:'<button type="button" class="slick-arrow next" style="color:#333;"><i class="md md-arrow_forward"></i></button>',
+        prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
+        nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
     });
 
-    $('.btn').click(function(){
-        nativeclick.trigger();
-    });
-	
 });
 
 function errorAlert()
@@ -650,27 +642,21 @@ function chartPieDana(data)
     });	
 }
 
-function loadData()
+function loadDataDashboard()
 {
 	var data = JSON.parse(window.localStorage.getItem('dataDashboard'));
 
-	$('.card').addClass('loading');
 	if(data != null){
-		setValue(data);
-
-		setTimeout(function(){
-			$('.card').removeClass('loading');
-		    $('.error-alert').removeClass('in');
-	    }, 1000);
+		$('.card').addClass('loading');
+		setValueDashboard(data);
 	} else {
-		saveToLokalData();
+		saveToLokalDataDsahboard();
 	}
-
-	/*infoUpdate(window.localStorage.getItem('lastUpdateDashboard'));*/
 }
 
-function saveToLokalData()
+function saveToLokalDataDashboard()
 {
+	$('.card').addClass('loading');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/dashboard',
         type: "post",
@@ -678,27 +664,25 @@ function saveToLokalData()
 		async: true,
         dataType: "json",
         success: function(data) {
-			var currentdate = new Date(); 
-        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
-							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
+			var currentdate = new Date();
+        	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                	 +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
         	window.localStorage.setItem('dataDashboard', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateDashboard', datetime);
-        	loadData();
+        	setValueDashboard(data);
         },
         error: function (textStatus, errorThrown) {
         	if(window.localStorage.getItem('dataDashboard') != null){
-	        	loadData();
+	        	loadDataDashboard();
 			} else {
         		errorAlert();
 			}
         }
-    }).done(function() {
-
     });
 }
-	
-function setValue(data)
+
+function setValueDashboard(data)
 {
 	chartDeviasi(data.deviasi);
 	chartPieDana(data.program_kegiatan);
@@ -714,9 +698,9 @@ function setValue(data)
 	$('.periode_1').html('s/d '+ data.total_deviasi['periode']);
 	$('.periode').html(data.total_deviasi['periode']);
 	$('#prosentase_deviasi').html(data.total_deviasi['prosentase']+'%');
-	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+" <br> dari <br> Rp. "+data.total_deviasi['target']);
+	$('#nilai_deviasi').html('Rp. '+data.total_deviasi['nilai']+"<br> dari<br> Rp. "+data.total_deviasi['target']);
 	$('#prosentase_efisiensi').html(data.total_efisiensi['prosentase']+'%');
-	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+" <br> dari <br> Rp. "+data.total_efisiensi['target']);
+	$('#nilai_efisiensi').html('Rp. '+data.total_efisiensi['nilai']+"<br> dari<br> Rp. "+data.total_efisiensi['target']);
 	$('#nilai_blm_terlaksana').html('Rp. '+data.total_blm_terlaksana['nilai']);
 	$('#prosentase_blm_terlaksana').html(data.total_blm_terlaksana['prosentase']+'%');
 	$('#nilai_blm_spj').html('Rp. '+data.total_blm_spj['nilai']);
@@ -724,7 +708,7 @@ function setValue(data)
 	$('#target_bulan_ini').html('Target : Rp. '+data.target_serapan['target']);
 	$('#serapan_bulan_ini').html('Serapan : Rp. '+data.target_serapan['serapan']);
 	$('#sisa_serapan').html('Rp. '+data.target_serapan['sisa_dana']);
-	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari');
+	$('#sisa_waktu').html(data.target_serapan['sisa_waktu']+' Hari  <sup>'+data.target_serapan['sisa_jam']+' <sup>Jam</sup></sup>  <sup>'+data.target_serapan['sisa_menit']+' <sup>Menit</sup></sup>');
 	$('.circliful').find('span').remove();
 	$('.circliful').find('canvas').remove();
 	$('.circliful').attr('data-text', parseInt(data.target_serapan['prosentase'])+'%');
@@ -735,9 +719,11 @@ function setValue(data)
 	$('#list_sebaran_bidang').find('tr').remove();
 	$.each(data.program_kegiatan, function(i, field){
 		var row = '<tr>'
-	                    +'<td width="15"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
-	                    +'<td>'+ field.nama_singkat +'</td>'
-	                    +'<td class="text-right">Rp. '+ field.jml_anggaran +'. '+ field.jml_program +' Program '+ field.jml_kegiatan +' Kegiatan</td>'
+	                    +'<td width="5%"><div style="background:'+data.target_apbd['color'][i]+';width:10px;height:10px;border-radius:3px;"></div></td>'
+	                    +'<td width="30%">'+ field.nama_singkat +'</td>'
+	                    +'<td width="20%" align="right">Rp. '+ field.jml_anggaran +' </td>'
+	                    +'<td width="22%" align="right">'+ field.jml_program +' Program </td>'
+	                    +'<td width="23%" align="right">'+ field.jml_kegiatan +' Kegiatan </td>'
 	                	+'</tr>';
 
 		$('#list_sebaran_bidang').append(row);
@@ -748,8 +734,8 @@ function setValue(data)
 	if(data.realisasi_terbaru){
     	$.each(data.realisasi_terbaru, function(i, field){
     		var row = '<div class="media">'
-                            +'<div class="media-left"><div style="width:15px;height:15px;border-radius:50em;background:#509785;"></div></div>'
-                            +'<div class="media-body text-left">'
+                            +'<div class="media-left"><div style="margin-top:3px;width:12px;height:13px;border-radius:50em;background:#509785;float:left"></div></div>'
+                            +'<div class="media-body text-left" style="margin:-1px 0px 13px 20px;">'
                                 +'<div>'+ field.nama_kegiatan +'</div>'
                                 +'<div>Rp. '+ field.total_realisasi +'</div>'
                                 +'<div>'+ field.nama_sub_bidang +'</div>'
@@ -759,14 +745,20 @@ function setValue(data)
     		$('#list_realisasi').append(row);
     	});
     } else {
-    	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:25px;">Tidak ada data realisasi</div>');
+    	$('#list_realisasi').parent().append('<div class="media-0" style="margin-top:0px;">Tidak ada data realisasi</div>');
     }
+
+    setTimeout(function(){
+		$('.card').removeClass('loading');
+	    $('.error-alert').removeClass('in');
+    }, 500);
+
+	infoUpdate(window.localStorage.getItem('lastUpdateDashboard'));
 }
 
 function infoUpdate(text)
 {
 	setTimeout(function(){
-		$('.info-last-update').html(text);
-		$('.info-last-update').slideDown("slow");
-	}, 2000);
+		$('.app-dashboard #info-last-update').html(text);
+	}, 900);
 }

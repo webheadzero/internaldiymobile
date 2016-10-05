@@ -1,18 +1,11 @@
 $(document).ready(function()
 {
-    $('#sidebar-toggler-button').click(function(){
-        if($('#sidebar-mobile').hasClass('active')){
-            $('#sidebar-mobile').removeClass('active');
-        } else {
-            $('#sidebar-mobile').addClass('active');
-        }
-        return false;
-    });
-    $('.sidebar-mobile-overlay').click(function() {
-        $('#sidebar-mobile').removeClass('active');
-    });
+	if(navigator.onLine){
+		saveToLokalDataEksekutif();
+	}else{
+		loadDataEksekutif();
+	}
 
-	loadData();
 	Highcharts.setOptions({
         lang: {
             decimalPoint: ',',
@@ -22,23 +15,19 @@ $(document).ready(function()
             yDecimals: 2
         }
     });
-    $('#dashboard-logo').slick({
-        infinite: false,
+    $('#eksekutif-npd').slick({
+        infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight:false,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 5000,
         dots:false,
         arrows:true,
-        pauseOnHover:false,
+        pauseOnHover:true,
         swipe:true,
         prevArrow:'<button type="button" class="slick-arrow prev"><i class="md md-arrow_back"></i></button>',
         nextArrow:'<button type="button" class="slick-arrow next"><i class="md md-arrow_forward"></i></button>',
-    });
-
-    $('.btn').click(function(){
-        nativeclick.trigger();
     });
 	
 });
@@ -46,15 +35,6 @@ $(document).ready(function()
 function errorAlert()
 {
     $('.error-alert').addClass('in');
-}
-
-function refresh()
-{
-	loadData();
-
-	setTimeout(function(){
-		refresh();
-	}, 30000);
 }
 
 function chartTransaksiNpd(data)
@@ -272,15 +252,15 @@ function chartTransaksi(data)
             }
         },
         series: [
-            {
-                name: 'Realisasi',
-                color:'#2ecc71',
-                data: realisasi
-            },
             { 
                 name: 'Pengajuan', 
                 color:'#3498db', 
                 data: pengajuan
+            },
+            {
+                name: 'Realisasi',
+                color:'#2ecc71',
+                data: realisasi
             },
         ]
     });
@@ -333,9 +313,9 @@ function chartKasDiBidang(data)
                     fontWeight:'bold',
                     fontSize:'11'
                 },
-                rotation:-30,
-                x:0,
-                y:13
+                rotation:-55,
+                x:12,
+                y:10
             },
             gridLineWidth:0,
             lineWidth:2,
@@ -392,27 +372,21 @@ function chartKasDiBidang(data)
     });
 }
 
-function loadData()
+function loadDataEksekutif()
 {
 	var data = JSON.parse(window.localStorage.getItem('dataKeuangan'));
 
-	$('.card').addClass('loading');
 	if(data != null){
-		setValue(data);
-
-		setTimeout(function(){
-			$('.card').removeClass('loading');
-		    $('.error-alert').removeClass('in');
-	    }, 1000);
+		$('.card').addClass('loading');
+		setValueEksekutif(data);
 	}else{
-		saveToLokalData();
+		saveToLokalDataEksekutif();
 	}
-
-	/*infoUpdate(window.localStorage.getItem('lastUpdateKeuangan'));*/
 }
 
-function saveToLokalData()
+function saveToLokalDataEksekutif()
 {
+	$('.card').addClass('loading');
 	$.ajax({
         url: 'http://bappeda.jogjaprov.go.id/si_internal/api/eksekutif',
         type: "post",
@@ -421,22 +395,20 @@ function saveToLokalData()
         dataType: "json",
         success: function(data) {
 			var currentdate = new Date(); 
-        	var datetime = "Last update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
-							                +currentdate.getHours()+":"+currentdate.getMinutes()+" Wib";
+        	var datetime = "Last data update : " +currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+" "
+							                	 +currentdate.getHours()+":"+currentdate.getMinutes()+" WIB";
 
         	window.localStorage.setItem('dataKeuangan', JSON.stringify(data));
         	window.localStorage.setItem('lastUpdateKeuangan', datetime);
-        	loadData();
+        	setValue(data);
         },
         error: function (textStatus, errorThrown) {
         	if(window.localStorage.getItem('dataKeuangan') != null){
-	        	loadData();
+	        	loadDataEksekutif();
 			} else {
         		errorAlert();
 			}
         }
-    }).done(function() {
-
     });
 }
 	
@@ -475,12 +447,18 @@ function setValue(data)
                     +'</tr>';
         $('.sebaran_kas_disub_bidang').append(row);
     });
+
+	setTimeout(function(){
+		$('.card').removeClass('loading');
+	    $('.error-alert').removeClass('in');
+    }, 500);
+
+	infoUpdate(window.localStorage.getItem('lastUpdateKeuangan'));
 }
 
 function infoUpdate(text)
 {
 	setTimeout(function(){
-		$('.info-last-update').html(text);
-		$('.info-last-update').slideDown("slow");
-	}, 2000);
+		$('.app-eksekutif #info-last-update').html(text);
+	}, 900);
 }

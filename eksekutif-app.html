@@ -1,0 +1,91 @@
+<script type="text/javascript" src="js/app-eksekutif.js"></script>
+
+<div class="app-eksekutif">
+    <div class="app-content">
+    	<div id="updatebox">
+            <div id="info-last-update">Last data update :</div>
+            <button type="button" class="btn btn-right" onclick="saveToLokalDataEksekutif();"><i class="md md-refresh"></i></button>
+        </div>
+        <div id="eksekutif-npd" class="eksekutif" style="color:#fff;padding:50px 30px;">
+            <div class="item">
+                <div style="font-size:1em;margin-bottom:5px;">Pengajuan NPD</div>
+                <div id="jml_pengajuan_npd_rp" class="font-thin" style="font-size:1em;margin:10px 0;">Rp. -</div>
+                <div id="jml_pengajuan_npd" class="font-thin" style="font-size:1em;">0 NPD</div>
+            </div>
+            <div class="item">
+                <div style="font-size:1em;margin-bottom:5px;">Realisasi NPD</div>
+                <div id="jml_realisasi_npd_rp" class="font-thin" style="font-size:1em;margin:10px 0;">Rp. -</div>
+                <div id="jml_realisasi_npd" class="font-thin" style="font-size:1em;">0 NPD</div>
+            </div>
+        </div>
+        <div style="padding:15px 10px;">
+            <div class="card">
+                <div class="card-heading">Kas Bappeda Diy</div>
+                <div class="card-body text-center">
+                    <div id="sisa_kas_bappeda" style="font-size:1.4em"></div>
+                    <br/>
+                    <div>Dana yang masih di bendahara</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Kas Di Sub Bidang</div>
+                <div class="card-body">
+                    <div id="kas_disub_bidang" style="font-size:1.4em;text-align: center;"></div>
+                    <br/>
+                    <div style="text-align:center;overflow: hidden;">
+                        <div style="float:left;" id="kas_up_disub_bidang"> UP = Rp. 0,00 </div>
+                        <div style="float:right;" id="npd_up_disub_bidang"> 0 NPD </div>
+                        <div style="clear:both;"></div>
+                        <div style="float:left;" id="kas_tu_disub_bidang"> TU = Rp. 0,00</div>
+                        <div style="float:right;" id="npd_tu_disub_bidang"> 0 NPD </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Kas Yang Belum Menerima GU</div>
+                <div class="card-body text-center">
+                    <div id="kas_belum_gu" style="font-size:1.2em;"></div>
+                    <div id="persen_belum_gu" style="font-size:3em;margin:10px 0;"></div>
+                    <div id="npd_belum_gu"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">LS Bappeda</div>
+                <div class="card-body text-center">
+                    <div id="ls_bappeda" style="font-size:1.2em"></div>
+                    <br/>
+                    <div id="npd_ls_bappeda"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Kas Di Bidang</div>
+                <div id="chart-kas-dibidang" style="height:300px;"></div>
+                <div style="padding:15px">
+                    <table style="width:100%;font-size:11px;" class="sebaran_kas_disub_bidang"> </table>
+                </div>
+            </div>                    
+            <div class="card">
+                <div class="card-heading">Keterlambatan Laporan Realisasi</div>
+                <div class="card-body" style="overflow: hidden;">
+                    <div style="float: left;height:100px;text-align: center;width: 50%;border-right: 1px solid rgba(255,255,255,0.1);padding:30px 0 0;">
+                        <div id="npd_terlambat" style="font-size:3em;"></div>
+                        <div>NPD</div>
+                    </div>
+                    <div style="float: right;height:100px;text-align: center;width: 50%;padding:30px 0 0;">
+                        <div id="bidang_terlambat" style="font-size:3em;"></div>
+                        <div>BIDANG</div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <div class="card">
+                <div class="card-heading">Sebaran Transaksi NPD (Rp)</div>
+                <div id="chart-transaksi" style="height:250px;"></div>
+            </div>
+            <div class="card">
+                <div class="card-heading">Sebaran Transaksi NPD (Buah)</div>
+                <div id="chart-transaksi-npd" style="height:220px;"></div>
+            </div>
+        </div>
+    </div>
+    </div>

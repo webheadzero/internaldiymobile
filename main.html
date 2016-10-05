@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'default-src'; media-src *">
+        -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <!-- <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/Toast.js"></script> -->
+        <script type="text/javascript">
+        /*
+            document.addEventListener("deviceready",function(){
+				document.addEventListener("backbutton", onBackKeyDown, false);
+            },false);
+
+            var lastTimeBackPress=0;
+			var durationToExit=2000;
+
+			function onBackKeyDown(e){
+			    e.preventDefault();
+			    e.stopPropagation();
+			    if(new Date().getTime() - lastTimeBackPress < durationToExit){
+			        navigator.app.exitApp();
+			    }else{
+			        window.plugins.toast.showWithOptions(
+			            {
+			              message: "Tekan sekali lagi untuk keluar.",
+			              duration: "short",
+			              position: "bottom",
+			              addPixelsY: -40
+			            }
+			          );
+			        lastTimeBackPress=new Date().getTime();
+			    }
+			};
+        */
+        </script>
+        <style type="text/css">
+        	.divider{
+        		position: fixed;
+        		top: 116px;
+        		left: 0;
+        		width: 50%;
+        		height: 4px;
+        		background: #0A82F6;
+        		transition: all 300ms ease-out;
+        	}
+        </style>
+        <title>SI Internal Bappeda DIY</title>
+    </head>
+    <body style="background:#0E0F19;">
+        <div class="app-container">
+            <div class="app-header">
+                <div class="app-title">Dashboard Internal</div>
+            </div>
+            <ul class="app-nav">
+                <li class="active"><a href="#" class="btn btn-next"><i class="md md-equalizer"></i> Dashboard</a></li>
+                <li><a href="#" class="btn btn-prev"><i class="md md-dvr"></i> Eksekutif</a></li>
+            </ul>
+            <div class="divider"></div>
+            <div id="app-frame">
+                <div class="framebox" id="dashboard-app"><div>satu</div></div>
+                <div class="framebox" id="eksekutif-app"><div>dua</div></div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="plugins/highcharts/jquery.circliful.min.js"></script>
+        <script type="text/javascript" src="plugins/highcharts/highcharts.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+        <script type="text/javascript" src="plugins/slick/slick.min.js"></script>
+
+        <script type="text/javascript">
+            $(function(){
+                $('#dashboard-app').load('dashboard-app.html');
+            	$('#eksekutif-app').load('eksekutif-app.html');
+
+                $('#app-frame').slick({
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    adaptiveHeight:false,
+                    autoplay: false,
+                    autoplaySpeed: 5000,
+                    dots:false,
+                    arrows:false,
+                    pauseOnHover:true,
+                    swipe:true,
+                    swipeToSlide:true
+                })
+				.on('swipe', function(){
+					var track = $('#app-frame .slick-track').offset().left;
+				  	if($('#dashboard-app').hasClass('slick-active')){
+				  		$('.app-nav li').removeClass('active').find('.btn-next').parent().addClass('active');
+					  	$('.divider').css({
+					  		'transform':'translateX(0)'
+					  	});
+                        $('.app-title').text('Dashboard Internal');
+				  	}
+				  	if($('#eksekutif-app').hasClass('slick-active')){
+				  		$('.app-nav li').removeClass('active').find('.btn-prev').parent().addClass('active');
+				  		$('.divider').css({
+					  		'transform':'translateX(100%)'
+					  	});
+                        $('.app-title').text('Eksekutif Keuangan');
+				  	}
+				});
+
+				$('.app-nav li a').on('click',function(){
+					if($(this).hasClass('btn-next')){
+						$(this).parent().addClass('active').siblings().removeClass('active');
+						$('#app-frame').slick('slickPrev');
+						$('.divider').css({
+					  		'transform':'translateX(0)'
+					  	});
+                        $('.app-title').text('Eksekutif Keuangan');
+					} else {
+						$(this).parent().addClass('active').siblings().removeClass('active');
+						$('#app-frame').slick('slickNext');
+						$('.divider').css({
+					  		'transform':'translateX(100%)'
+					  	});
+                        $('.app-title').text('Dashboard Internal');
+					}
+				});
+				$('.btn').click(function(){
+					nativeclick.trigger();
+				});
+
+            });
+        </script>
+    </body>
+</html>
